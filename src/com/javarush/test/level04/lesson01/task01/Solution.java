@@ -21,8 +21,11 @@ public class Solution
 
         public void adjustAge(int age)
         {
-            age = age + 20;
+
+            age = this.age + 20;
+            this.age  = age;
             System.out.println("The Age in adjustAge() is " + age);
+
         }
     }
 }
