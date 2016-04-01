@@ -9,12 +9,19 @@ package com.javarush.test.level03.lesson08.task01;
 */
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Solution
 {
     public static void main(String[] args) throws Exception
     {
         //напишите тут ваш код
+        Scanner  scanner = new Scanner(System.in);
+        int number;
+        String name;
+        number = scanner.nextInt();
+        name = scanner.nextLine();
+        System.out.println(name + " захватит мир через " + number + " лет. Му-ха-ха!");
 
     }
 }
