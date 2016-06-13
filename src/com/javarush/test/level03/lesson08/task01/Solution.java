@@ -16,12 +16,10 @@ public class Solution
     public static void main(String[] args) throws Exception
     {
         //напишите тут ваш код
-        Scanner  scanner = new Scanner(System.in);
-        int number;
-        String name;
-        number = scanner.nextInt();
-        name = scanner.nextLine();
-        System.out.println(name + " захватит мир через " + number + " лет. Му-ха-ха!");
+        Scanner scanner =new Scanner(System.in);
+        String num = scanner.nextLine();
+        String name  = scanner.nextLine();
+        System.out.println(name + " захватит мир через " + num + " лет. Му-ха-ха!");
 
     }
 }
