@@ -27,13 +27,19 @@ public class Solution
         //напишите тут ваш код
         Scanner scanner = new Scanner(System.in);
         double t = scanner.nextDouble();
-        if ((int)t%3 == 0){
-            System.out.println("желтый");
-        }else {
-            if ((int)t%4 == 0){
-                System.out.println("красный");
+        if (t<=60) {
+            if ( t == 0){
+                System.out.println("зеленый");
             }else {
-                System.out.println("зелёный");
+                if ((int) t % 3 == 0) {
+                    System.out.println("желтый");
+                } else {
+                    if ((int) t % 4 == 0) {
+                        System.out.println("красный");
+                    } else {
+                        System.out.println("зеленый");
+                    }
+                }
             }
         }
 
