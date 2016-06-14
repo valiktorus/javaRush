@@ -24,10 +24,18 @@ public class Solution
 {
     public static void main(String[] args) throws Exception
     {
-        //напишите тут ваш
+        //напишите тут ваш код
         Scanner scanner = new Scanner(System.in);
         double t = scanner.nextDouble();
-
+        if ((int)t%3 == 0){
+            System.out.println("желтый");
+        }else {
+            if ((int)t%4 == 0){
+                System.out.println("красный");
+            }else {
+                System.out.println("зелёный");
+            }
+        }
 
     }
 }
