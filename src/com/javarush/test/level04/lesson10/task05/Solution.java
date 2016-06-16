@@ -15,20 +15,7 @@ public class Solution
     public static void main(String[] args) throws Exception
     {
         //напишите тут ваш код
-        int i = 1;
-        while (i < 11){
-            int nextNum = i;
-            for (int j = 0; j <10 ; j++){
-                if (j!=9) {
-                    System.out.print(nextNum + " ");
-                    nextNum += i;
-                }else {
-                    System.out.print(nextNum);
-                }
-            }
-            System.out.println();
-            i++;
-        }
+
 
     }
 }
