@@ -16,10 +16,10 @@ public class Solution
         int a =scanner.nextInt();
         int b =scanner.nextInt();
         int c =scanner.nextInt();
-        int array[] = {a,b,c};
+       /* int array[] = {a,b,c};*/
         if (a < Math.max(b,c) && a > Math.min(b,c)){
-        System.out.println(a);
-        }else {
+            System.out.println(a);
+        } else {
             if (b < Math.max(a,c) && b > Math.min(a,c)){
                 System.out.println(b);
             }else {
