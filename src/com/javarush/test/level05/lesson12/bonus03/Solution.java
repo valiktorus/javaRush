@@ -1,6 +1,7 @@
 package com.javarush.test.level05.lesson12.bonus03;
 
 import java.io.*;
+import java.util.Scanner;
 
 /* Задача по алгоритмам
 Написать программу, которая:
@@ -14,13 +15,14 @@ public class Solution
     public static void main(String[] args) throws Exception
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-  //      int maximum = ;
+       // int maximum = ;
 
         //напишите тут ваш код
 
 
 
 
-        System.out.println(maximum);
+
+//        System.out.println(maximum);
     }
 }
