@@ -12,13 +12,23 @@ public class Cat {
     public Cat() {
     }
     //напишите тут ваш код
+    public static ArrayList<Cat> cats = new ArrayList<>();
 
     public static void main(String[] args) {
         //Создай тут 10 котов
+        for (int i = 0; i <10 ; i++)
+        {
+            Cat cat = new Cat();
+           cats.add(cat);
+        }
         printCats();
     }
 
     public static void printCats() {
         //Добавь свой код для пункта 3 тут
+        for (int i = 0; i <10 ; i++)
+        {
+            System.out.println(cats.get(i));
+        }
     }
 }
