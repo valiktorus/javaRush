@@ -1,8 +1,6 @@
 package com.javarush.test.level06.lesson11.bonus02;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /* Нужно добавить в программу новую функциональность
@@ -59,6 +57,8 @@ public class Solution {
         System.out.println(daughter);
     }
     public static class Cat{
+        public static final String CAT_NAME = "Cat name is %s, %s, %s";
+
         private String name;
         private Cat father;
         private Cat mother;
@@ -71,18 +71,28 @@ public class Solution {
             this.father = father;
             this.mother = mother;
         }
+
+        public String getMother() {
+            return mother != null ? "mother is " + mother.name: "no mother";
+        }
+
+        public String getFather() {
+            return father != null ? "father is " + father.name: "no mother";
+        }
+
         @Override
         public String toString()
         {
-            if (father == null && mother == null){
-                return "Cat name is " + name + ", no mother, no father";
-            }else{
-                if (mother == null || father == null ){
-                    return "Cat name is " + name + ((mother == null)? ", no mother, father is " + father.name: ", mother is " + mother.name + ", no father");
-                }else {
-                    return "Cat name is " + name + ", mother is " + mother.name + ", father is " + father.name;
-                }
-            }
+//            if (father == null && mother == null){
+//                return "Cat name is " + name + ", no mother, no father";
+//            }else{
+//                if (mother == null || father == null ){
+//                    return "Cat name is " + name + ((mother == null)? ", no mother, father is " + father.name: ", mother is " + mother.name + ", no father");
+//                }else {
+//                    return "Cat name is " + name + ", mother is " + mother.name + ", father is " + father.name;
+//                }
+//            }
+            return String.format(CAT_NAME, name, getMother(), getFather());
         }
     }
 }

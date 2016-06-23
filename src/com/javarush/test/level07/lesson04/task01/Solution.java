@@ -12,8 +12,7 @@ import java.util.Scanner;
 2. Метод max(int[] array) должен находить максимальное число из элементов массива
 */
 
-public class Solution
-{
+public class Solution {
     public static void main(String[] args) throws Exception {
         int[] array = initializeArray();
         int max = max(array);
