@@ -17,14 +17,12 @@ public class Solution
         //напишите тут ваш код
         String[] array = new String[10];
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i <10 ; i++) {
-            array[i] = null;
-        }
+
 
         for (int i = 0; i <8 ; i++) {
             array[i] = scanner.nextLine();
         }
-        for (int i = 9; i >=0 ; i++){
+        for (int i = 9; i >=0 ; i--){
             System.out.println(array[i]);
         }
 
