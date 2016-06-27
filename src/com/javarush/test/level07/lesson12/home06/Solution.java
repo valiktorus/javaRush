@@ -21,6 +21,25 @@ public class Solution
     public static class Human
     {
         //напишите тут ваш код
+        private String name;
+        private boolean sex;
+        private int age;
+        private Human father = null;
+        private Human mother = null;
+
+        public Human(String name, boolean sex, int age){
+            this.name = name;
+            this.sex =sex;
+            this.age = age;
+
+        public Human(String name, boolean sex, int age, Human father, Human mother){
+            this.name = name;
+            this.sex =sex;
+            this.age = age;
+            this.father = father;
+            this.mother = mother;
+        }
+
 
         public String toString()
         {
