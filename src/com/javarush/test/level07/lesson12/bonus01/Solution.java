@@ -24,8 +24,12 @@ public class Solution
             String name = reader.readLine();
 
             if (name.isEmpty()) break;
+            int age = Integer.parseInt(reader.readLine());
+            int weight = Integer.parseInt(reader.readLine());
+            int tailLength = Integer.parseInt(reader.readLine());
 
-            Cat cat = new Cat(name);
+
+            Cat cat = new Cat(name,age,weight,tailLength);
             CATS.add(cat);
         }
 
