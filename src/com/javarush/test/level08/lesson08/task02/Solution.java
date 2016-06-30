@@ -2,6 +2,7 @@ package com.javarush.test.level08.lesson08.task02;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /* Удалить все числа больше 10
@@ -15,7 +16,7 @@ public class Solution
     {
         //напишите тут ваш код
         HashSet<Integer> set = new HashSet<>();
-        for (int i = 10; i <30 ; i++) {
+        for (int i = 0; i <20 ; i++) {
             set.add(i);
         }
         return set;
@@ -25,7 +26,13 @@ public class Solution
     public static HashSet<Integer> removeAllNumbersMoreThan10(HashSet<Integer> set)
     {
         //напишите тут ваш код
-        set.removeAll
+        Iterator<Integer> iterator = set.iterator();
+        while (iterator.hasNext()){
+            if (iterator.next() >10){
+                iterator.remove();
+            }
+        }
+        return set;
 
     }
 }
