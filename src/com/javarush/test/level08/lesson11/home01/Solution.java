@@ -31,8 +31,9 @@ public class Solution
         for (int i = 0; i <3 ; i++) {
             set.add(new Cat());
         }
-        
+
         return set;
+
     }
 
     public static void printCats(Set<Cat> cats)
