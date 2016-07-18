@@ -34,7 +34,5 @@ public class Solution
             String value = text.getValue();
             System.out.println(value);
         }
-
     }
-
 }
