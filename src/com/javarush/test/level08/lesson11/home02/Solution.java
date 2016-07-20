@@ -28,7 +28,7 @@ public class Solution
 
     public static Set<Cat> createCats()
     {
-        HashSet<Cat> result = new HashSet<Cat>();
+        Set<Cat> result = new HashSet<Cat>();
 
         //напишите тут ваш ко
         for (int i = 0; i <4 ; i++)
@@ -42,7 +42,7 @@ public class Solution
     public static Set<Dog> createDogs()
     {
         //напишите тут ваш код
-        HashSet<Dog> result = new HashSet<Dog>();
+        Set<Dog> result = new HashSet<Dog>();
         for (int i = 0; i <3 ; i++)
         {
             result.add(new Dog());
@@ -53,18 +53,27 @@ public class Solution
     public static Set<Object> join(Set<Cat> cats, Set<Dog> dogs)
     {
         //напишите тут ваш код
+        Set<Object> pets = new HashSet<>();
+        pets.addAll(cats);
+        pets.addAll(dogs);
 
-        return null;
+
+        return pets;
     }
 
     public static void removeCats(Set<Object> pets, Set<Cat> cats)
     {
         //напишите тут ваш код
+        pets.removeAll(cats);
     }
 
     public static void printPets(Set<Object> pets)
     {
         //напишите тут ваш код
+        for (Object pet: pets)
+        {
+            System.out.println(pet);
+        }
     }
 
     //напишите тут ваш код
