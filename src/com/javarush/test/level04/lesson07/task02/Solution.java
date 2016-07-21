@@ -16,36 +16,13 @@ package com.javarush.test.level04.lesson07.task02;
 */
 
 import java.io.*;
-import java.util.Scanner;
 
 public class Solution
 {
     public static void main(String[] args) throws Exception
     {
         //напишите тут ваш код
-        Scanner scanner = new Scanner(System.in);
-        int num = scanner.nextInt();
-        String chetnoe ;
-        String length = "";
-        if (num<10){
-            length = " однозначное ";
-        }else {
-            if (num<100 && num >= 10){
-                length = " двузначное ";
-            }else {
-                if (num<1000 && num >=100){
-                    length = " трехзначное ";
-                }
-            }
-        }
-        if (num%2 == 0){
-            chetnoe = "четное";
-        }else{
-            chetnoe = "нечетное";
-        }
-        if (num<=1000){
-            System.out.println(chetnoe + length + "число");
-        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     }
 }

@@ -26,22 +26,18 @@ public class Solution
     {
         //напишите тут ваш код
         Scanner scanner = new Scanner(System.in);
-        double t = scanner.nextDouble();
-        if (t<=60) {
-            if ( t == 0){
-                System.out.println("зеленый");
+        double minute = scanner.nextDouble();
+
+        if ((int)minute%5 >= 3 && (int)minute%5 < 4){
+            System.out.println("желтый");
+        }else {
+            if ((int)minute%5 >= 4 && (int)minute%5 < 5){
+                System.out.println("красный");
             }else {
-                if ((int) t % 3 == 0) {
-                    System.out.println("желтый");
-                } else {
-                    if ((int) t % 4 == 0) {
-                        System.out.println("красный");
-                    } else {
-                        System.out.println("зеленый");
-                    }
-                }
+                System.out.println("зеленый");
             }
         }
+
 
     }
 }
