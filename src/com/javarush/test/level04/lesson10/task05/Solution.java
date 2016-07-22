@@ -15,7 +15,17 @@ public class Solution
     public static void main(String[] args) throws Exception
     {
         //напишите тут ваш код
-
+        int i = 1;
+        int j;
+        while (i < 11){
+            j = 1;
+            while (j < 11){
+                System.out.print(i * j + " ");
+                j++;
+            }
+            i++;
+            System.out.println();
+        }
 
     }
 }

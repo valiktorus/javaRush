@@ -9,22 +9,9 @@ public class Solution
     public static void main(String[] args)
     {
         //напишите тут ваш код
-      /*  Cat[] arrayCat = new Cat[50000];
-        for (int i = 0; i <50000 ; i++)
-        {
-            arrayCat[i] = new Cat();
-        }
-        Dog[] arrayDog = new Dog[50000];
-        for (int i = 0; i <50000 ; i++)
-        {
-            arrayDog[i] = new Dog();
-        }*/
         for (int i = 0; i <50000 ; i++)
         {
             Cat cat = new Cat();
-        }
-        for (int i = 0; i <50000 ; i++)
-        {
             Dog dog = new Dog();
         }
 

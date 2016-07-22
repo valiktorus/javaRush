@@ -8,8 +8,6 @@ String multiply(String s) – возвращает строку повторен
 Амиго -> АмигоАмигоАмигоАмигоАмиго
 */
 
-//import com.sun.deploy.util.StringUtils;
-
 public class StringHelper
 {
     public static String multiply(String s)
@@ -18,7 +16,7 @@ public class StringHelper
         //напишите тут ваш код
         for (int i = 0; i <5 ; i++)
         {
-            result += s;
+            result = result + s;
         }
         return result;
     }
@@ -29,7 +27,7 @@ public class StringHelper
         //напишите тут ваш код
         for (int i = 0; i <count ; i++)
         {
-            result += s;
+            result +=s;
         }
         return result;
     }

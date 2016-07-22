@@ -19,16 +19,16 @@ public class Cat {
         for (int i = 0; i <10 ; i++)
         {
             Cat cat = new Cat();
-           cats.add(cat);
+            cats.add(cat);
         }
         printCats();
     }
 
     public static void printCats() {
         //Добавь свой код для пункта 3 тут
-        for (int i = 0; i <10 ; i++)
+        for (Cat cat: cats)
         {
-            System.out.println(cats.get(i));
+            System.out.println(cat);
         }
     }
 }

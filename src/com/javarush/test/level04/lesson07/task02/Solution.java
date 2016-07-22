@@ -23,6 +23,33 @@ public class Solution
     {
         //напишите тут ваш код
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+        int number = Integer.parseInt(reader.readLine());
+        String chet;
+        String znach;
+        if (number>0 && number<1000)
+        {
+            if (number % 2 == 0)
+            {
+                chet = "четное ";
+            } else
+            {
+                chet = "нечетное ";
+            }
+            if (number < 10)
+            {
+                znach = "однозначное ";
+            } else
+            {
+                if (number < 100)
+                {
+                    znach = "двузначное ";
+                } else
+                {
+                    znach = "трехзначное ";
+                }
+            }
+            System.out.println(chet + znach + "число");
+        }
     }
 }
+
