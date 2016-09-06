@@ -1,11 +1,9 @@
-/*
 package com.javarush.test.level09.lesson08.task03;
 
 import java.io.CharConversionException;
 import java.io.IOException;
 import java.nio.file.FileSystemException;
 
-*/
 /* Перехват выборочных исключений
 1. Разберись, какие исключения бросает метод BEAN.methodThrowExceptions.
 2. Метод processExceptions должен вызывать метод BEAN.methodThrowExceptions и обрабатывать исключения:
@@ -19,18 +17,29 @@ import java.nio.file.FileSystemException;
 catch (MyException e) {
 throw e;
 }
-*//*
-
+*/
 
 public class Solution {
     public static StatelessBean BEAN = new StatelessBean();
 
     public static void main(String[] args) {
-        processExceptions();
+        try {
+            processExceptions();
+        } catch (FileSystemException e) {
+            BEAN.log(e);
+        }
     }
 
-    public static void processExceptions() {
-        BEAN.methodThrowExceptions();
+    public static void processExceptions() throws FileSystemException {
+        try {
+            BEAN.methodThrowExceptions();
+        } catch (FileSystemException e) {
+            BEAN.log(e);
+            throw e;
+        } catch (IOException e) {
+            BEAN.log(e);
+        }
+
     }
 
     public static class StatelessBean {
@@ -49,4 +58,5 @@ public class Solution {
         }
     }
 }
-*/
+
+
