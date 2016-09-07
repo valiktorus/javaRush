@@ -1,13 +1,12 @@
-/*
 package com.javarush.test.level08.lesson11.home06;
 
-*/
 /* Вся семья в сборе
 1. Создай класс Human с полями имя (String), пол (boolean), возраст (int), дети (ArrayList<Human>).
 2. Создай объекты и заполни их так, чтобы получилось: два дедушки, две бабушки, отец, мать, трое детей.
 3. Вывести все объекты Human на экран.
-*//*
+*/
 
+import java.util.ArrayList;
 
 public class Solution
 {
@@ -19,6 +18,14 @@ public class Solution
     public static class Human
     {
         //напишите тут ваш код
+        String name;
+        boolean sex;
+        int age;
+        ArrayList<Human> children = new ArrayList<>();
+
+        public Human(String name, boolean sex, int age) {
+            this.name = name;
+        }
 
         public String toString()
         {
@@ -44,4 +51,3 @@ public class Solution
     }
 
 }
-*/
