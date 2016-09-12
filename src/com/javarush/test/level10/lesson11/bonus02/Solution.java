@@ -1,6 +1,9 @@
 package com.javarush.test.level10.lesson11.bonus02;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /* Нужно добавить в программу новую функциональность
 Задача: Программа вводит с клавиатуры пару (число и строку) и выводит их на экран.
@@ -28,9 +31,16 @@ public class Solution
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int id = Integer.parseInt(reader.readLine());
-        String name = reader.readLine();
+        HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+        while (true) {
+            Integer i = Integer.parseInt(reader.readLine());
+            String s = reader.readLine();
+            hashMap.put(s,i);
+        }
 
-        System.out.println("Id=" + id + " Name=" + name);
+        for (Map.Entry<String, Integer> pair: hashMap.entrySet()) {
+
+            System.out.println(pair.getValue() + " " + pair.getKey());
+        }
     }
 }
