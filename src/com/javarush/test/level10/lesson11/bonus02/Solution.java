@@ -2,7 +2,6 @@ package com.javarush.test.level10.lesson11.bonus02;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /* Нужно добавить в программу новую функциональность
@@ -30,17 +29,19 @@ public class Solution
     public static void main(String[] args) throws IOException
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+        Map<String,Integer> map = new HashMap<>();
         while (true) {
-            Integer i = Integer.parseInt(reader.readLine());
-            String s = reader.readLine();
-            hashMap.put(s,i);
+            String tmp = reader.readLine();
+            if (tmp.isEmpty())break;
+            int id = Integer.parseInt(tmp);
+            String name = reader.readLine();
+            if (name.isEmpty())break;
+            map.put(name,id);
+
         }
-
-        for (Map.Entry<String, Integer> pair: hashMap.entrySet()) {
-
+        for (HashMap.Entry<String,Integer> pair: map.entrySet()) {
             System.out.println(pair.getValue() + " " + pair.getKey());
         }
+
     }
 }
