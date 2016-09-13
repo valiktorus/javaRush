@@ -1,8 +1,8 @@
 package com.javarush.test.level08.lesson08.task05;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 /* Удалить людей, имеющих одинаковые имена
 Создать словарь (Map<String, String>) занести в него десять записей по принципу «фамилия» - «имя».
@@ -15,27 +15,37 @@ public class Solution
     {
         //напишите тут ваш код
         HashMap<String,String> map = new HashMap<>();
-        map.put("1","11");
-        map.put("2","12");
-        map.put("3","13");
-        map.put("4","13");
-        map.put("5","14");
-        map.put("6","15");
-        map.put("7","16");
-        map.put("8","17");
-        map.put("9","18");
-        map.put("10","19");
-    return map;
+        map.put("1","2");
+        map.put("2","2");
+        map.put("3","2");
+        map.put("4","2");
+        map.put("5","3");
+        map.put("6","4");
+        map.put("7","5");
+        map.put("8","6");
+        map.put("9","2");
+        map.put("10","2");
+        removeTheFirstNameDuplicates(map);
+        return map;
+
     }
 
     public static void removeTheFirstNameDuplicates(HashMap<String, String> map)
     {
         //напишите тут ваш код
-        Set<Map.Entry<String,String>> set = map.entrySet();
-        for (Map.Entry<String,String> entry: map.entrySet())
-        {
+        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
 
+        while (iterator.hasNext())
+        {
+            //получение «пары» элементов
+            Map.Entry<String, String> pair = iterator.next();
+            String key = pair.getKey();            //ключ
+            String value = pair.getValue();        //значение
+            removeItemFromMapByValue(map,value);
         }
+
+
+
 
     }
 
