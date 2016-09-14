@@ -1,8 +1,9 @@
 package com.javarush.test.level08.lesson08.task05;
 
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /* Удалить людей, имеющих одинаковые имена
 Создать словарь (Map<String, String>) занести в него десять записей по принципу «фамилия» - «имя».
@@ -11,6 +12,10 @@ import java.util.Map;
 
 public class Solution
 {
+  /*  public static void main(String[] args) {
+        System.out.println(createMap());
+    }*/
+
     public static HashMap<String, String> createMap()
     {
         //напишите тут ваш код
@@ -33,19 +38,16 @@ public class Solution
     public static void removeTheFirstNameDuplicates(HashMap<String, String> map)
     {
         //напишите тут ваш код
-        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
-
-        while (iterator.hasNext())
-        {
-            //получение «пары» элементов
-            Map.Entry<String, String> pair = iterator.next();
-            String key = pair.getKey();            //ключ
-            String value = pair.getValue();        //значение
-            removeItemFromMapByValue(map,value);
+        Set<String> values = new HashSet<>();
+        for (Map.Entry<String, String> entry : new HashMap<>(map).entrySet()) {
+            String value = entry.getValue();
+            if (values.contains(value)) {
+                continue;
+            }
+            removeItemFromMapByValue(map, value);
+            map.put(entry.getKey(), value);
+            values.add(value);
         }
-
-
-
 
     }
 
