@@ -18,35 +18,22 @@ public class Solution
     public static void printObjectType(Object o)
     {
       //Напишите тут ваше решение
-
-
+        System.out.println(o instanceof Cat ? "Кошка": (o instanceof Dog ? "Собака" : (o instanceof Bird ? "Птица" : "Лампа")));
     }
+
     public static class Cat
     {
-     public String name(){
-         return "Кошка";
-     }
     }
 
     public static class Dog
     {
-        public String name(){
-            return "Собака";
-        }
     }
 
     public static class Bird
     {
-        public String name(){
-            return "Птица";
-        }
     }
 
     public static class Lamp
     {
-        public String name(){
-            return "Лампа";
-        }
     }
-
 }
