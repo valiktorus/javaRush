@@ -9,16 +9,18 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        int a =1;
-        Integer b =2;
-
+        Integer a = 1;
+        int b = 2;
+        Solution.print(a);
+        print(b);
     }
 
     //Напишите тут ваши методы
-    public int print(int a){
+
+    public static int print(int a){
         return a;
     }
-    public Integer print(Integer a){
+    public static Integer print(Integer a){
         return a;
     }
 }
