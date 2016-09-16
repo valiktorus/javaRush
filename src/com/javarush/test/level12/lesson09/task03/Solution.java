@@ -27,28 +27,46 @@ public class Solution
         public void eat();
     }
 
-    public class Dog implements Fly,Move,Eat
+    public abstract class Dog implements Move, Eat {
+        public void eat(){
+            System.out.println("eat");
+        }
+        public void move(){
+            System.out.println("move");
+        }
+
+    }
+
+    public abstract class Duck implements Fly, Move, Eat
     {
-        public void eat(int a){
-            System.out.println(a);
+        public void eat(){
+            System.out.println("eat");
         }
-        public void move(int a){
-            System.out.println(a);
+        public void move(){
+            System.out.println("move");
         }
-        public void fly(int a){
-            System.out.println(a);
+        public void fly(){
+            System.out.println("fly");
         }
     }
 
-    public class Duck
+    public abstract class Car implements Move
     {
+
+        public void move(){
+            System.out.println("move");
+        }
+
     }
 
-    public class Car
+    public abstract class Airplane implements Fly
     {
-    }
 
-    public class Airplane
-    {
+        public void move(){
+            System.out.println("move");
+        }
+        public void fly(){
+            System.out.println("fly");
+        }
     }
 }
