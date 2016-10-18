@@ -7,6 +7,7 @@ package com.javarush.test.level13.lesson11.home04;
 */
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Solution
 {
@@ -14,12 +15,21 @@ public class Solution
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         FileWriter fileWriter = new FileWriter(reader.readLine());
+        ArrayList<String> list = new ArrayList<>();
         while (true){
             String buffer = reader.readLine();
-            if (buffer == "exit") break;
-            fileWriter.write(buffer);
+            if (buffer.equals("exit")){
+                list.add("exit");
+                break;
+            }else{
+                list.add(buffer + "\n");
+            }
         }
         reader.close();
+
+        for (int i = 0; i <list.size() ; i++) {
+            fileWriter.write(list.get(i));
+        }
         fileWriter.close();
     }
 }
