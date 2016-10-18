@@ -13,9 +13,9 @@ public class Person implements RepkaItem
 
     @Override
     public String getNamePadezh() {
-        return "Родительский";
+        return namePadezh;
     }
     public void pull(Person person){
-
+        System.out.println(name +" за " + person.getNamePadezh());
     }
 }

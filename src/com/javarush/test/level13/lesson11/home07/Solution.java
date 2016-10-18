@@ -6,7 +6,7 @@ package com.javarush.test.level13.lesson11.home07;
 3. Программа должна компилироваться.
 */
 
-import com.javarush.test.level08.lesson11.home05.T;
+
 
 public class Solution
 {
@@ -19,6 +19,7 @@ public class Solution
     {
         SimpleObject<T> getInstance();
     }
+
     public static class StringObject<Object> implements SimpleObject <String>{
         @Override
         public SimpleObject<String> getInstance() {

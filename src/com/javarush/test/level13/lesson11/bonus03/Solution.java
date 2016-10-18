@@ -16,7 +16,6 @@ package com.javarush.test.level13.lesson11.bonus03;
 7 http://info.javarush.ru/uploads/images/00/00/07/2014/08/12/3b9c65580b.png
 */
 
-/*
 public class Solution
 {
     public static void main(String[] args)
@@ -41,4 +40,3 @@ public class Solution
                 robotFirst.getName(), robotSecond.getName(), attacked, defenced));
     }
 }
-*/
