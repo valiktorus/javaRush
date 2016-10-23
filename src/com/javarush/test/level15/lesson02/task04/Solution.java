@@ -10,6 +10,9 @@ package com.javarush.test.level15.lesson02.task04;
 5.2. markTwainOutput для книг Марка Твена.
 */
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Solution {
     public static void main(String[] args) {
         List<Book> books = new LinkedList<Book>();
@@ -35,6 +38,9 @@ public class Solution {
 
             String output = "output";
             //Add your code here
+            if (author.equals("Mark Twain")){
+                output = markTwainOutput;
+            }else output = agathaChristieOutput;
 
             return output;
         }
@@ -43,4 +49,41 @@ public class Solution {
             return getOutputByBookType();
         }
     }
+    public static class MarkTwainBook extends Book{
+        private String bookName;
+
+        public MarkTwainBook(String bookName) {
+            super("Mark Twain");
+            this.bookName = bookName;
+        }
+
+        @Override
+        public MarkTwainBook getBook() {
+            return (MarkTwainBook) this;
+        }
+
+        @Override
+        public String getName() {
+            return bookName;
+        }
+    }
+    public  static class AgathaChristieBook extends Book{
+        private String bookName;
+
+        public AgathaChristieBook(String bookName) {
+            super("Agatha Christie");
+            this.bookName = bookName;
+        }
+
+        @Override
+        public AgathaChristieBook getBook() {
+            return (AgathaChristieBook) this;
+        }
+
+        @Override
+        public String getName() {
+            return bookName;
+        }
+    }
+
 }
