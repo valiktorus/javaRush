@@ -21,24 +21,29 @@ public class Solution {
         new Solution.Lanos().printlnDesire();
     }
 
-    public static class Ferrari extends Constants {
+    public static class Ferrari extends LuxuriousCar {
         public void printlnDesire() {
             //add your code here
-            System.out.println(WANT_STRING + FERRARY_NAME);
+            System.out.println(Constants.WANT_STRING + Constants.FERRARY_NAME);
         }
     }
 
-    public static class Lanos extends Constants {
+    public static class Lanos extends CheapCar{
         public void printlnDesire() {
             //add your code here
-            System.out.println(WANT_STRING + LANOS_NAME);
+            System.out.println(Constants.WANT_STRING + Constants.LANOS_NAME);
         }
     }
     public static class LuxuriousCar{
+        void printlnDesire(){
+            System.out.println(Constants.WANT_STRING + Constants.LUXURIOUS_CAR);
+        }
 
     }
     public static class CheapCar{
-
+        protected void printlnDesire(){
+            System.out.println(Constants.WANT_STRING + Constants.CHEAP_CAR);
+        }
     }
 
     public static class Constants {
