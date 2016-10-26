@@ -32,30 +32,29 @@ import java.util.ArrayList;
 public class Solution {
     public static void main(String[] args) {
         //add your code here
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             String[] allUrl = reader.readLine().split("\\?");
             String[] finalUrl = allUrl[1].split("&");
             ArrayList<String> obj = new ArrayList<>();
             for (int i = 0; i <finalUrl.length ; i++) {
                 String[] tmp = finalUrl[i].split("=");
-                if (tmp[0].equals("obj")){
-                    try {
-                        obj.add(tmp[1]);
-                    }catch (NullPointerException e){
-
-                    }
+//                if ("obj".equals(tmp[0]) && tmp[1] != null){
+//                    obj.add(tmp[1]);
+                if ("obj".equals(tmp[0])){
+                    obj.add(tmp[1] != null ? tmp[1] : "");
                 }
-                System.out.print(tmp[0] + " ");
+                if(i != finalUrl.length-1) {
+                    System.out.print(tmp[0] + " ");
+                }else System.out.print(tmp[0]);
             }
             try {
+                System.out.println();
                 for (String list : obj) {
-                    try {
-                        System.out.println();
-                        alert(Double.parseDouble(list));
 
+                    try {
+                        alert(Double.parseDouble(list));
                     } catch (Exception e) {
-                        System.out.println();
                         alert(list);
                     }
                 }
@@ -64,13 +63,6 @@ public class Solution {
             }
 
         }catch (IOException e){
-
-        }finally {
-            try {
-                reader.close();
-            }catch (IOException e){
-
-            }
 
         }
     }
