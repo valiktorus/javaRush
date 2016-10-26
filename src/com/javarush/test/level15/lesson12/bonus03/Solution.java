@@ -30,9 +30,10 @@ public class Solution {
         if (n <0){
             return "0";
         }else {
-            long res = 1;
-            for (int i = 1; i <=n ; i++) {
-                res = res*i;
+            BigInteger res  = BigInteger.valueOf(1);
+            for (long i = 1; i <=n ; i++) {
+
+                res = res.multiply(BigInteger.valueOf(i));
             }
             return String.valueOf(res);
         }
