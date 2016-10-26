@@ -22,17 +22,55 @@ obj name
 double 3.14
 */
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Solution {
     public static void main(String[] args) {
         //add your code here
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            String[] a = reader.readLine().split("?");
+            String[] allUrl = reader.readLine().split("\\?");
+            String[] finalUrl = allUrl[1].split("&");
+            ArrayList<String> obj = new ArrayList<>();
+            for (int i = 0; i <finalUrl.length ; i++) {
+                String[] tmp = finalUrl[i].split("=");
+                if (tmp[0].equals("obj")){
+                    try {
+                        obj.add(tmp[1]);
+                    }catch (NullPointerException e){
+
+                    }
+                }
+                System.out.print(tmp[0] + " ");
+            }
+            try {
+                for (String list : obj) {
+                    try {
+                        System.out.println();
+                        alert(Double.parseDouble(list));
+
+                    } catch (Exception e) {
+                        System.out.println();
+                        alert(list);
+                    }
+                }
+            }catch (NullPointerException e){
+
+            }
+
         }catch (IOException e){
+
+        }finally {
+            try {
+                reader.close();
+            }catch (IOException e){
+
+            }
 
         }
     }
