@@ -24,21 +24,28 @@ public class Solution {
 
     public static class GenerateThread extends Thread {
         public GenerateThread() {
-            super(String.valueOf(countCreatedThreads));
+            super(String.valueOf(++countCreatedThreads));
+            start();
+
+
         }
 
         @Override
         public void run() {
-            while (countCreatedThreads <= count){
-                countCreatedThreads++;
-                System.out.println(new GenerateThread());
+            while (countCreatedThreads < count){
 
+                System.out.println(new GenerateThread());
+                try {
+                    Thread.currentThread().join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
         @Override
         public String toString() {
-            return Thread.currentThread().getName() + " created";
+            return this.getName() + " created";
         }
     }
 }
