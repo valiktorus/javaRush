@@ -24,14 +24,16 @@ public class Solution {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             firstFileName = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
             secondFileName = reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -43,6 +45,7 @@ public class Solution {
         ReadFileInterface f = new ReadFileThread();
         f.setFileName(fileName);
         f.start();
+        f.join();
         System.out.println(f.getFileContent());
     }
 
@@ -56,45 +59,44 @@ public class Solution {
 
         void start();
     }
-    public static class ReadFileThread implements ReadFileInterface, Runnable{
-        private String fullFileName;
+    public static class ReadFileThread extends Thread implements ReadFileInterface{
+        public static String fileName;
+        public static String content = "";
+
+        public ReadFileThread() {
+        }
 
         @Override
         public void setFileName(String fullFileName) {
-            this.fullFileName = fullFileName;
+            fileName = fullFileName;
         }
 
         @Override
         public String getFileContent() {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(fullFileName));
-                String s;
-                String result = null;
-                while (!(s = reader.readLine()).equals(null)){
-                    result +=s;
-                }
-                return result;
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        public void join() throws InterruptedException {
-
-        }
-
-        @Override
-        public void start() {
+            run();
+            return content;
 
         }
 
         @Override
         public void run() {
+            String s;
+            String result = "";
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+                while (!(s = reader.readLine()).equals(null)){
+                    result = result + s + " ";
+                }
+//                result = result.substring(0,result.length()-1);
+
+                reader.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            content = result;
+
 
         }
     }
