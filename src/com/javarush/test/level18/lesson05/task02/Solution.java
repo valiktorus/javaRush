@@ -9,12 +9,24 @@ package com.javarush.test.level18.lesson05.task02;
 */
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Solution {
-    public static void main(String[] args) throws Exception{
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        String fileName = bufferedReader.readLine();
-
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String fileName = reader.readLine();
+        reader.close();
+        FileInputStream fileInputStream = new FileInputStream(fileName);
+        int counter = 0;
+        while (fileInputStream.available()>0){
+            int fileByte = fileInputStream.read();
+            if (fileByte == 44){
+                counter++;
+            }
+        }
+        fileInputStream.close();
+        System.out.println(counter);
     }
 }
