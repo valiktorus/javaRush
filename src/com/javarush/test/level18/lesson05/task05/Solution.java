@@ -15,10 +15,14 @@ import java.io.InputStreamReader;
 public class Solution {
     public static void main(String[] args) throws DownloadException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        FileInputStream inputStream;
         try {
-            while (new FileInputStream(bufferedReader.readLine()).available() >=1000){
-
+            while ((inputStream = new FileInputStream(bufferedReader.readLine())).available() >=1000){
             }
+            bufferedReader.close();
+            inputStream.close();
+            throw new DownloadException();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
