@@ -10,16 +10,34 @@ package com.javarush.test.level18.lesson05.task03;
 
 import java.io.*;
 
+
+
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+
+        /* BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
         String firstFileName = reader.readLine();
         String secondFileName = reader.readLine();
         String thirdFileName = reader.readLine();
         reader.close();
+        FileInputStream fileInputStream = new FileInputStream(firstFileName);
+        FileOutputStream fileOutputStream = new FileOutputStream(secondFileName);
+        FileOutputStream fileOutputStream1 = new FileOutputStream(thirdFileName);
+        int available = fileInputStream.available();
+        while (fileInputStream.available() > 0){
+            int input = fileInputStream.read();
+            if (fileInputStream.available() > available/2) {
+                fileOutputStream.write(input);
+            }else {
+               fileOutputStream1.write(input);
+            }
+        }
+        fileInputStream.close();
+        fileOutputStream.close();
+        fileOutputStream1.close();*/
 
-    }
-    public void copy(InputStream inputStream, OutputStream outputStream){
 
     }
 }
