@@ -22,13 +22,22 @@ public class Solution {
         FileInputStream fileInputStream = new FileInputStream(firstFileName);
         FileOutputStream fileOutputStream = new FileOutputStream(secondFileName);
         FileOutputStream fileOutputStream1 = new FileOutputStream(thirdFileName);
-        byte[] buffer = new byte[fileInputStream.available()];
-        int count = 0;
-        while (fileInputStream.available()> 0 ){
-            count = fileInputStream.read(buffer);
+        byte[] buffer1;
+        byte[] buffer2;
+        if (fileInputStream.available()%2 == 0){
+            buffer1 = new byte[fileInputStream.available()/2];
+            buffer2 = new byte[fileInputStream.available()/2];
+        }else{
+            buffer1 =new byte[(fileInputStream.available()/2)+1];
+            buffer2 = new byte[fileInputStream.available()/2];
         }
-        fileOutputStream.write(buffer,0,count/2);
-        fileOutputStream1.write(buffer,(count/2)+1,count-1);
+        while (fileInputStream.available()>0){
+            fileInputStream.read(buffer1);
+            fileOutputStream.write(buffer1);
+            fileInputStream.read(buffer2);
+            fileOutputStream1.write(buffer2);
+        }
+        fileInputStream.close();
         fileOutputStream.close();
         fileOutputStream1.close();
 
