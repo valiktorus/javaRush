@@ -15,7 +15,22 @@ import java.io.*;
 public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+        String firstFileName = reader.readLine();
+        String secondFileName = reader.readLine();
+        String thirdFileName = reader.readLine();
+        reader.close();
+        FileInputStream fileInputStream = new FileInputStream(firstFileName);
+        FileOutputStream fileOutputStream = new FileOutputStream(secondFileName);
+        FileOutputStream fileOutputStream1 = new FileOutputStream(thirdFileName);
+        byte[] buffer = new byte[fileInputStream.available()];
+        int count = 0;
+        while (fileInputStream.available()> 0 ){
+            count = fileInputStream.read(buffer);
+        }
+        fileOutputStream.write(buffer,0,count/2);
+        fileOutputStream1.write(buffer,(count/2)+1,count-1);
+        fileOutputStream.close();
+        fileOutputStream1.close();
 
         /* BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
         String firstFileName = reader.readLine();
