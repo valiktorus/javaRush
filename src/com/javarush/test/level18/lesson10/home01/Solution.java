@@ -18,7 +18,11 @@ public class Solution {
         int counter = 0;
         while ((fileReader.available()>0)){
             int readenByte = fileReader.read();
-            if (readenByte>)
+            if ((readenByte >= 65 && readenByte<=90) || (readenByte >= 97 && readenByte <=122)){
+                counter++;
+            }
         }
+        System.out.println(counter);
+        fileReader.close();
     }
 }
