@@ -12,6 +12,39 @@ import java.io.*;
 */
 
 public class QuestionFileOutputStream implements AmigoOutputStream {
+    private AmigoOutputStream impl;
 
+    public QuestionFileOutputStream(AmigoOutputStream impl) {
+        this.impl = impl;
+    }
+
+    @Override
+    public void flush() throws IOException {
+        impl.flush();
+    }
+
+    @Override
+    public void write(int b) throws IOException {
+        impl.write(b);
+    }
+
+    @Override
+    public void write(byte[] b) throws IOException {
+        impl.write(b);
+    }
+
+    @Override
+    public void write(byte[] b, int off, int len) throws IOException {
+        impl.write(b,off,len);
+    }
+
+    @Override
+    public void close() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Вы действительно хотите закрыть поток? Д/Н");
+        String line = bufferedReader.readLine();
+        if (line.equals("Д")){impl.close();}
+        bufferedReader.close();
+    }
 }
 
