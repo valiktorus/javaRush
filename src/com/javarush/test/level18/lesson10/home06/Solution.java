@@ -15,25 +15,51 @@ package com.javarush.test.level18.lesson10.home06;
 f 361
 */
 
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+public class Solution
+{
+    public static void main(String[] args) throws IOException
+    {
+            FileInputStream fileInputStream = new FileInputStream(args[0]);
+            int[] symbCountArr = new int[256];
+            while (fileInputStream.available() > 0)
+            {
+                int ch = fileInputStream.read();
+                symbCountArr[ch]++;
+            }
+            //symbCountArr[10] = 0; - обнуление 10ого символа не помогает, в коде строка отсутствует
+            for (int i = 0; i < symbCountArr.length; i++)
+            {
+                if (symbCountArr[i] != 0){
+                    System.out.println((char)i + " " + symbCountArr[i]);}
+            }
+            fileInputStream.close();
+    }
+}
+
+
+
+/*import java.io.*;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(args[0]));
+ //       BufferedReader reader = new BufferedReader(new FileReader("d:/1.txt"));
+        FileInputStream reader = new FileInputStream(args[0]);
         Map<Integer,Integer> map = new TreeMap<>();
         int simbol;
-        while ((simbol = reader.read()) !=-1){
+        while (reader.available()>0){
+            simbol = reader.read();
             if (map.containsKey(simbol)){
-
-            }
+                map.put(simbol,map.get(simbol)+1);
+            }else map.put(simbol,1);
+        }
+        for (Map.Entry<Integer,Integer> pair: map.entrySet()) {
+            System.out.println((char)(int)pair.getKey() + " " + pair.getValue());
         }
 
 
     }
-}
+}*/
