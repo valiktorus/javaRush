@@ -33,10 +33,10 @@ public class Solution {
         String productName = "rgawhawhwahwah";
         double price = Double.parseDouble("123");
         int quantity = Integer.parseInt("345");
-        createProduct(productName,price,quantity);
+        if (args[0].equals("-c")) {
+            createProduct(productName, price, quantity);
+        }
 
-
-//        System.out.printf("%.2f", price);
     }
 
     public static String getFileName() throws IOException {
