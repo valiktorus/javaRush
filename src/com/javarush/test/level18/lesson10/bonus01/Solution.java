@@ -13,9 +13,44 @@ fileOutputName - имя файла, куда необходимо записат
 -d - ключ указывает, что необходимо расшифровать данные
 */
 
-public class Solution {
-    public static void main(String[] args) {
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        String key = args[0];
+        String fileName = args[1];
+        String fileOutputName = args[2];
+
+        if (key.equals("-e")){
+            encode(fileName,fileOutputName);
+        }
+        if (key.equals("-d")){
+            decode(fileName,fileOutputName);
+        }
     }
+
+    public static void encode(String fileName, String fileOutputName) throws IOException {
+        FileInputStream fileReader = new FileInputStream(fileName);
+        FileOutputStream fileWriter = new FileOutputStream(fileOutputName);
+        while (fileReader.available() > 0){
+            int normalElement = fileReader.read();
+            fileWriter.write(normalElement + 2);
+        }
+        fileReader.close();
+        fileWriter.close();
+    }
+    public static void decode(String fileName, String fileOutputName) throws IOException {
+        FileInputStream fileReader = new FileInputStream(fileName);
+        FileOutputStream fileWriter = new FileOutputStream(fileOutputName);
+        while (fileReader.available() > 0){
+            int encodedElement = fileReader.read();
+            fileWriter.write(encodedElement - 2);
+        }
+        fileReader.close();
+        fileWriter.close();
+    }
+
 
 }
