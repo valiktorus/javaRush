@@ -15,7 +15,32 @@ package com.javarush.test.level18.lesson10.home06;
 f 361
 */
 
-import java.io.FileInputStream;
+
+import java.io.*;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        //       BufferedReader reader = new BufferedReader(new FileReader("d:/1.txt"));
+        FileInputStream reader = new FileInputStream(args[0]);
+        Map<Integer,Integer> map = new TreeMap<>();
+        int simbol;
+        while (reader.available()>0){
+            simbol = reader.read();
+            if (map.containsKey(simbol)){
+                map.put(simbol,map.get(simbol)+1);
+            }else map.put(simbol,1);
+        }
+        reader.close();
+        for (Map.Entry<Integer,Integer> pair: map.entrySet()) {
+            System.out.println((char)(int)pair.getKey() + " " + pair.getValue());
+        }
+
+
+    }
+}
+/*import java.io.FileInputStream;
 import java.io.IOException;
 public class Solution
 {
@@ -36,30 +61,8 @@ public class Solution
             }
             fileInputStream.close();
     }
-}
-
-
-
-/*import java.io.*;
-import java.util.Map;
-import java.util.TreeMap;
-
-public class Solution {
-    public static void main(String[] args) throws IOException {
- //       BufferedReader reader = new BufferedReader(new FileReader("d:/1.txt"));
-        FileInputStream reader = new FileInputStream(args[0]);
-        Map<Integer,Integer> map = new TreeMap<>();
-        int simbol;
-        while (reader.available()>0){
-            simbol = reader.read();
-            if (map.containsKey(simbol)){
-                map.put(simbol,map.get(simbol)+1);
-            }else map.put(simbol,1);
-        }
-        for (Map.Entry<Integer,Integer> pair: map.entrySet()) {
-            System.out.println((char)(int)pair.getKey() + " " + pair.getValue());
-        }
-
-
-    }
 }*/
+
+
+
+/**/

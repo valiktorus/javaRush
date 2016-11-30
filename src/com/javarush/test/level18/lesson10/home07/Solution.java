@@ -17,7 +17,26 @@ quantity - количество, int
 Информация по каждому товару хранится в отдельной строке
 */
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String fileName = reader.readLine();
+        reader.close();
+        BufferedReader fileReader = new BufferedReader(new FileReader(fileName));
+        String s;
+        while ((s = fileReader.readLine()) !=null){
+            String[] description = s.split(" ");
+            int id = Integer.parseInt(description[0]);
+            if (id == Integer.parseInt(args[0])){
+                System.out.println(s);
+            }
+
+        }
+        fileReader.close();
     }
 }
