@@ -23,27 +23,27 @@ id productName price quantity
 */
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 
 public class Solution {
-    static int id = 0;
+    static int id = 12516;
     static String fileName = null;
     public static void main(String[] args) throws Exception {
         fileName = getFileName();
-        String productName = "rgawhawhwahwah";
-        double price = Double.parseDouble("123");
-        int quantity = Integer.parseInt("345");
-        if (args[0].equals("-c")) {
-            createProduct(productName, price, quantity);
-        }
+        id = 19847983;
+        String productName = "Куртка для сноубордистов, размера";
+        double price = Double.parseDouble("10173.99");
+        int quantity = Integer.parseInt("1234");
+
+        createProduct(productName, price, quantity);
 
     }
 
     public static String getFileName() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String fileName = reader.readLine();
-        reader.close();
-        return fileName;
+       try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+           return  reader.readLine();
+       }
 
     }
     public static void createProduct(String productName, double price, int quantity) throws IOException {
@@ -52,33 +52,60 @@ public class Solution {
         printProductPriceToFile(price);
         printQuantityToFile(quantity);
     }
-    public static void printIdToFile(int id) throws IOException {
-        BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(fileName));
-        for (int i = 0; i < 8 ; i++) {
-            writer.write(id);
+    public static void printIdToFile(Integer id) throws IOException {
+        try(RandomAccessFile file = new RandomAccessFile(fileName,"rw")) {
+            file.skipBytes((int) file.length());
+            char[] idCharArray = id.toString().toCharArray();
+
+            for (int i = 0; i < 8; i++) {
+                if (i <= idCharArray.length - 1) {
+                    file.write(idCharArray[i]);
+                } else {
+                    file.write(" ".getBytes());
+                }
+            }
         }
-        writer.close();
-    }
-    public static void printProductNameToFile(String productName) throws IOException {
-        BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(fileName));
-        byte[] buffer = new byte[60];
-        buffer = productName.getBytes();
-        writer.write(buffer, 0, 60);
-        writer.close();
-    }
-    public static void printProductPriceToFile(double price) throws IOException {
-        BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(fileName));
-        String priceString = String.format("%.2f", price);
-        byte[] buffer = new byte[16];
-        buffer = priceString.getBytes();
-        writer.write(buffer);
-        writer.close();
 
     }
-    public static void printQuantityToFile(int quantity) throws IOException {
-        BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(fileName));
-        for (int i = 0; i < 4 ; i++) {
-            writer.write(quantity);
+    public static void printProductNameToFile(String productName) throws IOException {
+        try(RandomAccessFile file = new RandomAccessFile(fileName,"rw")) {
+            file.skipBytes((int) file.length());
+            char[] productNameChar = productName.toCharArray();
+            for (int i = 0; i < 30; i++) {
+                if (i <= productNameChar.length - 1) {
+                    file.write(productNameChar[i]);
+                } else {
+                    file.write(" ".getBytes());
+                }
+            }
+        }
+    }
+    public static void printProductPriceToFile(double price) throws IOException {
+        try(RandomAccessFile file = new RandomAccessFile(fileName,"rw")){
+            file.skipBytes((int) file.length());
+            String priceString = String.format("%.2f", price);
+            char[] priceChars = priceString.toCharArray();
+            for (int i = 0; i <8 ; i++) {
+                if (i <= priceChars.length - 1){
+                    file.write(priceChars[i]);
+                }else {
+                    file.write(" ".getBytes());
+                }
+            }
+        }
+
+    }
+    public static void printQuantityToFile(Integer quantity) throws IOException {
+        try(RandomAccessFile file = new RandomAccessFile(fileName,"rw")) {
+            file.skipBytes((int) file.length());
+            char[] quantityChar = quantity.toString().toCharArray();
+            for (int i = 0; i < 4; i++) {
+                if (i <= quantityChar.length - 1) {
+                    file.write(quantityChar[i]);
+                } else {
+                    file.write(" ".getBytes());
+                }
+            }
         }
     }
 }

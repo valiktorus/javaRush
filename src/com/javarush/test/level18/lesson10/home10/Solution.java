@@ -21,24 +21,31 @@ public class Solution {
         String fileName;
         String fullFileName = null;
         Map<Integer,String> sequenceOfParts = new TreeMap<>();
-        while (!(fileName = reader.readLine()).equals("end")){
-            String[] parts = fileName.split(".part");
-            sequenceOfParts.put(Integer.parseInt(parts[1]),fileName);
-            if (fullFileName == null){
-                fullFileName = parts[0];
+        try {
+            while (!("end").equals(fileName = reader.readLine())) {
+                String[] parts = fileName.split(".part");
+                sequenceOfParts.put(Integer.parseInt(parts[1]), fileName);
+                if (fullFileName == null) {
+                    fullFileName = parts[0];
+                }
             }
+        }finally {
+            reader.close();
         }
-        reader.close();
+
         new File(fullFileName).createNewFile();
         FileOutputStream writerToOriginalFile = new FileOutputStream(fullFileName);
         for (Map.Entry<Integer,String> pair: sequenceOfParts.entrySet()) {
             FileInputStream fileReader = new FileInputStream(pair.getValue());
-            while (fileReader.available() > 0){
-                byte[] buffer = new byte[fileReader.available()];
-                fileReader.read(buffer);
-                writerToOriginalFile.write(buffer);
+            try {
+                while (fileReader.available() > 0) {
+                    byte[] buffer = new byte[fileReader.available()];
+                    fileReader.read(buffer);
+                    writerToOriginalFile.write(buffer);
+                }
+            }finally {
+                fileReader.close();
             }
-            fileReader.close();
         }
         writerToOriginalFile.close();
     }
