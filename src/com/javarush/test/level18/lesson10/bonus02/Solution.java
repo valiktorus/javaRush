@@ -27,17 +27,17 @@ import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 
 public class Solution {
-    static int id = 12516;
+    static int id;
     static String fileName = null;
     public static void main(String[] args) throws Exception {
         fileName = getFileName();
-        id = 19847983;
-        String productName = "Куртка для сноубордистов, размера";
-        double price = Double.parseDouble("10173.99");
-        int quantity = Integer.parseInt("1234");
-
-        createProduct(productName, price, quantity);
-
+        id = 0;
+        if ("-c".equals(args[0])) {
+            String productName = args[1];
+            double price = Double.parseDouble(args[2]);
+            int quantity = Integer.parseInt(args[3]);
+            createProduct(productName, price, quantity);
+        }
     }
 
     public static String getFileName() throws IOException {
@@ -56,6 +56,7 @@ public class Solution {
         try(RandomAccessFile file = new RandomAccessFile(fileName,"rw")) {
             file.skipBytes((int) file.length());
             char[] idCharArray = id.toString().toCharArray();
+            if (id != 1){ file.write(System.lineSeparator().getBytes());}
 
             for (int i = 0; i < 8; i++) {
                 if (i <= idCharArray.length - 1) {
@@ -70,10 +71,10 @@ public class Solution {
     public static void printProductNameToFile(String productName) throws IOException {
         try(RandomAccessFile file = new RandomAccessFile(fileName,"rw")) {
             file.skipBytes((int) file.length());
-            char[] productNameChar = productName.toCharArray();
-            for (int i = 0; i < 30; i++) {
-                if (i <= productNameChar.length - 1) {
-                    file.write(productNameChar[i]);
+            byte[] bytes = productName.getBytes();
+            for (int i = 0; i < 60; i++) {
+                if (i <= bytes.length - 1) {
+                    file.write(bytes[i]);
                 } else {
                     file.write(" ".getBytes());
                 }
