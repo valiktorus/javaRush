@@ -36,17 +36,17 @@ public class Solution {
         String productName;
         double price;
         int quantity;
-//        if ("-u".equals(args[0])){
-            id = Integer.parseInt("132");
-            productName = "qwerty";
-            price = Double.parseDouble("214.90");
-            quantity = Integer.parseInt("124");
+        if ("-u".equals(args[0])){
+            id = Integer.parseInt(args[1]);
+            productName = args[2];
+            price = Double.parseDouble(args[3]);
+            quantity = Integer.parseInt(args[4]);
             update(id,productName,price,quantity);
- //       }
- //       if ("-d".equals(args[0])){
-  //          id = Integer.parseInt(args[1]);
-  //          delete(id);
-  //      }
+        }
+        if ("-d".equals(args[0])){
+            id = Integer.parseInt(args[1]);
+            delete(id);
+        }
     }
     public static String getFileName() throws IOException {
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
@@ -62,8 +62,11 @@ public class Solution {
         writeListToFile(listOfLines);
     }
 
-    public static void delete(int id){
-
+    public static void delete(int id) throws IOException {
+        ArrayList<String> listOfLInes = createListOfLines();
+        listOfLInes = findLineByIdAndDeleteInList(id, listOfLInes);
+        deleteOldDataFromFile();
+        writeListToFile(listOfLInes);
     }
 
     public static String createUpdatedLine(int id, String productName, double price, int quantity){
@@ -76,7 +79,6 @@ public class Solution {
                 listOfLines.set(i,updatedLine);
             }
         }
-
     }
 
     public static boolean checkReadedLineById(int id, String readedLine){
@@ -113,6 +115,19 @@ public class Solution {
                 }
             return list;
         }
+    }
+    public static ArrayList<String> findLineByIdAndDeleteInList(int id, ArrayList<String> listOfLines) {
+        Integer indexOfLineToDelete = null;
+        for (int i = 0; i < listOfLines.size(); i++) {
+            if (checkReadedLineById(id, listOfLines.get(i))) {
+                indexOfLineToDelete = i;
+            }
+        }
+        if (indexOfLineToDelete != null) {
+            listOfLines.remove((int) indexOfLineToDelete);
+            return listOfLines;
+        }
+        return null;
     }
 }
 
