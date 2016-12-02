@@ -25,51 +25,64 @@ id productName price quantity
 import java.io.*;
 
 public class Solution {
-    static int id;
     static String fileName = null;
     public static void main(String[] args) throws Exception {
         fileName = getFileName();
-        id = 0;
         if ("-c".equals(args[0])) {
+            int maxId = getMaxId();
             String productName = args[1];
             double price = Double.parseDouble(args[2]);
             int quantity = Integer.parseInt(args[3]);
-            createProduct(productName, price, quantity);
+            createProduct(maxId,productName, price, quantity);
         }
     }
 
-    public static String getFileName() throws IOException {
+    private static String getFileName() throws IOException {
        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
            return  reader.readLine();
        }
     }
 
-    public static void createProduct(String productName, double price, int quantity) throws IOException {
-        writeIdToFile(++id);
+    private static void createProduct(int maxId,String productName, double price, int quantity) throws IOException {
+        writeIdToFile(++maxId);
         writeProductNameToFile(productName);
         writeProductPriceToFile(price);
         writeQuantityToFile(quantity);
     }
 
-    public static void writeIdToFile(Integer id) throws IOException {
+    private static void writeIdToFile(Integer maxId) throws IOException {
         try(FileWriter writer = new FileWriter(fileName, true)) {
- //           if (id != 1){writer.write(System.lineSeparator());}
-            writer.write(String.format("%-8.8s", id));
+            if (maxId != 1){writer.write(System.lineSeparator());}
+            writer.write(String.format("%-8.8s", maxId));
         }
     }
-    public static void writeProductNameToFile(String productName) throws IOException {
+    private static void writeProductNameToFile(String productName) throws IOException {
         try(FileWriter writer = new FileWriter(fileName, true)) {
             writer.write(String.format("%-30.30s", productName));
         }
     }
-    public static void writeProductPriceToFile(double price) throws IOException {
+    private static void writeProductPriceToFile(double price) throws IOException {
         try(FileWriter writer = new FileWriter(fileName, true)){
              writer.write(String.format("%-8.2f", price).replace(',','.'));
         }
     }
-    public static void writeQuantityToFile(Integer quantity) throws IOException {
+    private static void writeQuantityToFile(Integer quantity) throws IOException {
         try(FileWriter writer = new FileWriter(fileName, true)) {
             writer.write(String.format("%-4.4s", quantity));
         }
+    }
+    private static int getMaxId() throws IOException {
+        int maxId = 0;
+        String line;
+        try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+            if ((line = reader.readLine()) != null){
+                String idWithSpaces = line.substring(0,8);
+                Integer lineId = Integer.parseInt(idWithSpaces.split(" ")[0]);
+                if (lineId > maxId){
+                    maxId = lineId;
+                }
+            }
+        }
+        return maxId;
     }
 }
