@@ -31,16 +31,12 @@ import java.util.List;
 
 public class Solution {
     private static final String PRODUCT_ELEMENTS_FORMAT ="%-8d%-30.30s%-8.2f%-4d";
-    private static List<Product> productList = Collections.emptyList();
+    private static List<Product> productList;
     public static void main(String[] args) throws Exception {
         String fileName = getFileName();
-        args = new String[4];
-        args[0] = "-c";
-        args[1] = "kkfya vfjyav";
-        args[2] = "141.88";
-        args[3] = "123";
+        productList = new ArrayList<>();
         if ("-c".equals(args[0])){
-            productList = readProductsFromFile(fileName);
+            readProductsFromFile(fileName);
             int maxId = getMaxId(productList);
             productList.add(new Product(++maxId, args[1],Double.parseDouble(args[2]),Integer.parseInt(args[3])));
             writeProductListToFile(fileName);
@@ -52,23 +48,23 @@ public class Solution {
             return  reader.readLine();
         }
     }
-    private static List<Product> readProductsFromFile(String fileName) throws IOException {
-        List<Product> productList = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+    private static void readProductsFromFile(String fileName) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String fileLine;
-            while ((fileLine = reader.readLine()) !=null){
-                productList.add(makeProductFromLine(fileLine));
+            while ((fileLine = reader.readLine()) != null) {
+                Product product = makeProductFromLine(fileLine);
+                productList.add(product);
             }
         }
-        return productList;
     }
+
     private static Product makeProductFromLine(String fileLine){
-        int id = Integer.parseInt(fileLine.substring(0,8).split(" ")[0]);
+        Integer id = Integer.parseInt(fileLine.substring(0,8).split(" ")[0]);
         String productName = fileLine.substring(8,38);
         double price = Double.parseDouble(fileLine.substring(38,46).split(" ")[0]);
         int quantity = Integer.parseInt(fileLine.substring(46,50).split(" ")[0]);
-        return new Product(id,productName,price,quantity);
-
+        Product product = new Product(id,productName,price,quantity);
+        return product;
     }
 
     private static int getMaxId(List<Product> productList){
