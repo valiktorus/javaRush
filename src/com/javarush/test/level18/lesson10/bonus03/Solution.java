@@ -24,8 +24,11 @@ id productName price quantity
 19847983Куртка для сноубордистов, разм10173.991234
 */
 
+import javafx.print.Collation;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Solution {
@@ -56,14 +59,14 @@ public class Solution {
 
     public static void update(int id, String productName, double price, int quantity) throws IOException {
         String updatedLine = createUpdatedLine(id, productName, price, quantity);
-        ArrayList<String> listOfLines = createListOfLines();
+        List<String> listOfLines = createListOfLines();
         findLineByIdAndReplaceInList(id, updatedLine,listOfLines);
         deleteOldDataFromFile();
         writeListToFile(listOfLines);
     }
 
     public static void delete(int id) throws IOException {
-        ArrayList<String> listOfLInes = createListOfLines();
+        List<String> listOfLInes = createListOfLines();
         listOfLInes = findLineByIdAndDeleteInList(id, listOfLInes);
         deleteOldDataFromFile();
         writeListToFile(listOfLInes);
@@ -93,7 +96,7 @@ public class Solution {
         }
     }
 
-    public static void writeListToFile(ArrayList<String> listOfLines) throws IOException {
+    public static void writeListToFile(List<String> listOfLines) throws IOException {
         try(FileWriter writer = new FileWriter(fileName)){
             for (int i = 0; i <listOfLines.size() ; i++) {
                 if (i == listOfLines.size()-1) {
@@ -116,7 +119,7 @@ public class Solution {
             return list;
         }
     }
-    public static ArrayList<String> findLineByIdAndDeleteInList(int id, ArrayList<String> listOfLines) {
+    public static List<String> findLineByIdAndDeleteInList(int id, List<String> listOfLines) {
         Integer indexOfLineToDelete = null;
         for (int i = 0; i < listOfLines.size(); i++) {
             if (checkReadedLineById(id, listOfLines.get(i))) {
@@ -127,7 +130,7 @@ public class Solution {
             listOfLines.remove((int) indexOfLineToDelete);
             return listOfLines;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 }
 
