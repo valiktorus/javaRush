@@ -23,66 +23,91 @@ id productName price quantity
 */
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Solution {
-    static String fileName = null;
+    private static final String PRODUCT_ELEMENTS_FORMAT ="%-8d%-30.30s%-8.2f%-4d";
+    private static List<Product> productList = Collections.emptyList();
     public static void main(String[] args) throws Exception {
-        fileName = getFileName();
-        if ("-c".equals(args[0])) {
-            int maxId = getMaxId();
-            String productName = args[1];
-            double price = Double.parseDouble(args[2]);
-            int quantity = Integer.parseInt(args[3]);
-            createProduct(maxId,productName, price, quantity);
+        String fileName = getFileName();
+
+        if ("-c".equals(args[0])){
+            productList = readProductsFromFile(fileName);
         }
     }
 
     private static String getFileName() throws IOException {
-       try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-           return  reader.readLine();
-       }
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            return  reader.readLine();
+        }
     }
+    private static void createProduct(){
 
-    private static void createProduct(int maxId,String productName, double price, int quantity) throws IOException {
-        writeIdToFile(++maxId);
-        writeProductNameToFile(productName);
-        writeProductPriceToFile(price);
-        writeQuantityToFile(quantity);
     }
-
-    private static void writeIdToFile(Integer maxId) throws IOException {
-        try(FileWriter writer = new FileWriter(fileName, true)) {
-            if (maxId != 1){writer.write(System.lineSeparator());}
-            writer.write(String.format("%-8.8s", maxId));
-        }
-    }
-    private static void writeProductNameToFile(String productName) throws IOException {
-        try(FileWriter writer = new FileWriter(fileName, true)) {
-            writer.write(String.format("%-30.30s", productName));
-        }
-    }
-    private static void writeProductPriceToFile(double price) throws IOException {
-        try(FileWriter writer = new FileWriter(fileName, true)){
-             writer.write(String.format("%-8.2f", price).replace(',','.'));
-        }
-    }
-    private static void writeQuantityToFile(Integer quantity) throws IOException {
-        try(FileWriter writer = new FileWriter(fileName, true)) {
-            writer.write(String.format("%-4.4s", quantity));
-        }
-    }
-    private static int getMaxId() throws IOException {
-        int maxId = 0;
-        String line;
+    private static List<Product> readProductsFromFile(String fileName) throws IOException {
+        List<Product> productList = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
-            if ((line = reader.readLine()) != null){
-                String idWithSpaces = line.substring(0,8);
-                Integer lineId = Integer.parseInt(idWithSpaces.split(" ")[0]);
-                if (lineId > maxId){
-                    maxId = lineId;
-                }
+            String fileLine;
+            while ((fileLine = reader.readLine()) !=null){
+                makeProductFromLine(fileLine);
             }
         }
-        return maxId;
+    }
+    private static Product makeProductFromLine(String fileLine){
+        int id = Integer.parseInt(fileLine.substring(0,8).split(" ")[0]);
+        String productName = fileLine.substring(8,38);
+        double price = Double.parseDouble(fileLine.substring(38,46).split(" ")[0]);
+        int quantity = Integer.parseInt(fileLine.substring(46,50).split(" ")[0]);
+
+
+    }
+    public static class Product{
+
+        private int id;
+        private String productName;
+        private double price;
+        private int quantity;
+
+
+        public Product(int id, String productName, double price, int quantity) {
+            this.id = id;
+            this.productName = productName;
+            this.price = price;
+            this.quantity = quantity;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public void setProductName(String productName) {
+            this.productName = productName;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
     }
 }

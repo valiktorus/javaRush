@@ -70,7 +70,7 @@ public class Solution {
     }
 
     public static String createUpdatedLine(int id, String productName, double price, int quantity){
-        return String.format("%-8.8s%-30.30s%-8.2f%-4.4s",String.valueOf(id),productName,price,String.valueOf(quantity));
+        return String.format("%-8d%-30.30s%-8.2f%-4d",id,productName,price,quantity);
     }
 
     public static void findLineByIdAndReplaceInList(int id, String updatedLine, List<String> listOfLines) throws IOException {
