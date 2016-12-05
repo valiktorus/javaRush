@@ -52,27 +52,29 @@ import java.util.List;
 
 public class CRUD {
     private static final String PRODUCT_ELEMENTS_FORMAT ="%-8d%-30.30s%-8.2f%-4d";
+    public static final int CREATE_ARGS_SIZE = 4;
+    public static final int UPDATE_ARGS_SIZE  = 5;
+    public static final int DELETE_ARGS_SIZE = 2;
+
     public static void main(String[] args) throws Exception {
         if (args.length == 0){return;}
         String fileName = getFileName();
         List<Product> productList = new ArrayList<>();
-        if ("-c".equals(args[0])){
+        if (args.length == CREATE_ARGS_SIZE &&"-c".equals(args[0])){
             productList = readProductsFromFile(fileName, productList);
             int maxId = getMaxId(productList);
             productList.add(new Product(++maxId, args[1],Double.parseDouble(args[2]),Integer.parseInt(args[3])));
             writeProductListToFile(fileName, productList);
-        }
-        if ("-u".equals(args[0])){
-            productList = readProductsFromFile(fileName, productList);
-            productList = findProductByIdAndReplaceInList(productList,Integer.parseInt(args[1]),
-                    args[2],Double.parseDouble(args[3]),Integer.parseInt(args[4]));
-            writeProductListToFile(fileName,productList);
-        }
-        if ("-d".equals(args[0])){
-            productList = readProductsFromFile(fileName,productList);
-            productList = findProductByIdAndDeleteInList(Integer.parseInt(args[1]), productList);
-            writeProductListToFile(fileName,productList);
-        }
+        }else if (args.length == UPDATE_ARGS_SIZE && "-u".equals(args[0])){
+                productList = readProductsFromFile(fileName, productList);
+                productList = findProductByIdAndReplaceInList(productList,Integer.parseInt(args[1]),
+                        args[2],Double.parseDouble(args[3]),Integer.parseInt(args[4]));
+                writeProductListToFile(fileName,productList);
+            }else if (args.length == DELETE_ARGS_SIZE && "-d".equals(args[0])){
+                    productList = readProductsFromFile(fileName,productList);
+                    productList = findProductByIdAndDeleteInList(Integer.parseInt(args[1]), productList);
+                    writeProductListToFile(fileName,productList);
+            }
     }
 
     private static String getFileName() throws IOException {
