@@ -47,32 +47,35 @@ id productName price quantity
 
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CRUD {
     private static final String PRODUCT_ELEMENTS_FORMAT ="%-8d%-30.30s%-8.2f%-4d";
     public static final int CREATE_ARGS_SIZE = 4;
     public static final int UPDATE_ARGS_SIZE  = 5;
     public static final int DELETE_ARGS_SIZE = 2;
+    public static final String MAKE_PRODUCT_REGEX = "^(\\d{1,8})\\s{0,7}(.{1,30})\\s{0,29}" +
+            "(\\d{1,5}\\.\\d{2})\\s{0,4}(\\d{1,4})\\s{0,3}$";
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0){return;}
         String fileName = getFileName();
-        List<Product> productList = new ArrayList<>();
+        List<Product> productList;
         if (args.length == CREATE_ARGS_SIZE &&"-c".equals(args[0])){
-            productList = readProductsFromFile(fileName, productList);
+            productList = readProductsFromFile(fileName);
             int maxId = getMaxId(productList);
             productList.add(new Product(++maxId, args[1],Double.parseDouble(args[2]),Integer.parseInt(args[3])));
             writeProductListToFile(fileName, productList);
         }else if (args.length == UPDATE_ARGS_SIZE && "-u".equals(args[0])){
-                productList = readProductsFromFile(fileName, productList);
-                productList = findProductByIdAndReplaceInList(productList,Integer.parseInt(args[1]),
+                productList = readProductsFromFile(fileName);
+                productList = updateProduct(productList,Integer.parseInt(args[1]),
                         args[2],Double.parseDouble(args[3]),Integer.parseInt(args[4]));
                 writeProductListToFile(fileName,productList);
             }else if (args.length == DELETE_ARGS_SIZE && "-d".equals(args[0])){
-                    productList = readProductsFromFile(fileName,productList);
-                    productList = findProductByIdAndDeleteInList(Integer.parseInt(args[1]), productList);
+                    productList = readProductsFromFile(fileName);
+                    deleteProduct(Integer.parseInt(args[1]), productList);
                     writeProductListToFile(fileName,productList);
             }
     }
@@ -82,7 +85,8 @@ public class CRUD {
             return  reader.readLine();
         }
     }
-    private static List<Product> readProductsFromFile(String fileName, List<Product> productList) throws IOException {
+    private static List<Product> readProductsFromFile(String fileName) throws IOException {
+        List<Product> productList = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String fileLine;
             while ((fileLine = reader.readLine()) != null) {
@@ -93,11 +97,13 @@ public class CRUD {
         return productList;
     }
 
-    private static Product makeProductFromLine(String fileLine){   // regex
-        Integer id = Integer.parseInt(fileLine.substring(0,8).trim()); //trim
-        String productName = fileLine.substring(8,38).trim();
-        double price = Double.parseDouble(fileLine.substring(38,46).trim());
-        int quantity = Integer.parseInt(fileLine.substring(46,50).trim());
+    private static Product makeProductFromLine(String fileLine){
+        Pattern pattern = Pattern.compile(MAKE_PRODUCT_REGEX);
+        Matcher matcher = pattern.matcher(fileLine);
+        Integer id = Integer.parseInt(matcher.group(1));
+        String productName = matcher.group(2);
+        double price = Double.parseDouble(matcher.group(3));
+        int quantity = Integer.parseInt(matcher.group(4));
         return new Product(id,productName,price,quantity);
 
     }
@@ -113,24 +119,22 @@ public class CRUD {
         return maxId;
     }
     private static void writeProductListToFile(String fileName, List<Product> productList) throws IOException {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            writer.write(""); //
-        }
-        // если здесь false поставить то каждый раз будет перезаписываться  и в итоге одна страчка будет
-        try(FileWriter writer = new FileWriter(fileName, true)) {
-            for (int i = 0; i <productList.size() ; i++) {
-                writer.write(String.format(PRODUCT_ELEMENTS_FORMAT,
+        int size = productList.size() - 1;
+        try(Writer writer = new BufferedWriter(new FileWriter(fileName, false))) {
+            for (int i = 0; i <= size ; i++) {
+                writer.append(String.format(String.format(new Locale("en"),
+                        PRODUCT_ELEMENTS_FORMAT,
                         productList.get(i).getId(),
                         productList.get(i).getProductName(),
                         productList.get(i).getPrice(),
-                        productList.get(i).getQuantity()));
-                if (i != productList.size() - 1) {
-                    writer.write("\n");
+                        productList.get(i).getQuantity())));
+                if (i != size) {
+                    writer.append("\n");
                 }
             }
         }
     }
-    private static List<Product> findProductByIdAndReplaceInList(List<Product> productList, int id,String productName,
+    private static List<Product> updateProduct(List<Product> productList, int id,String productName,
                                                                  double price, int quantity){
         for (int i = 0; i < productList.size() ; i++) {
             if (productList.get(i).getId() == id){
@@ -139,17 +143,15 @@ public class CRUD {
         }
         return productList;
     }
-    private static List<Product> findProductByIdAndDeleteInList(int id, List<Product> productList){
-        Integer indexOfProductToDelete = null;
-        for (int i = 0; i < productList.size() ; i++) {
-            if (id == productList.get(i).getId()){
-                indexOfProductToDelete = i;
+    private static void deleteProduct(int id, List<Product> productList){
+        Iterator<Product> productIterator = productList.iterator();
+        while (productIterator.hasNext()){
+            Product product = productIterator.next();
+            if (id == product.getId()){
+                productIterator.remove();
+                break;
             }
         }
-        if (indexOfProductToDelete != null){
-            productList.remove((int)indexOfProductToDelete);
-        }
-        return productList;
     }
 
     public static class Product{
