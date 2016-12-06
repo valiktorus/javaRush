@@ -53,10 +53,10 @@ import java.util.regex.Pattern;
 
 public class CRUD {
     private static final String PRODUCT_ELEMENTS_FORMAT ="%-8d%-30.30s%-8.2f%-4d";
-    public static final int CREATE_ARGS_SIZE = 4;
-    public static final int UPDATE_ARGS_SIZE  = 5;
-    public static final int DELETE_ARGS_SIZE = 2;
-    public static final String MAKE_PRODUCT_REGEX = "^(\\d{1,8})\\s*(.{1,30})\\s*([0-9.]{4,8})\\s*(\\d{1,4})\\s*$";
+    private static final int CREATE_ARGS_SIZE = 4;
+    private static final int UPDATE_ARGS_SIZE  = 5;
+    private static final int DELETE_ARGS_SIZE = 2;
+    private static final String MAKE_PRODUCT_REGEX = "^(\\d{1,8})\\s*(.{1,30})\\s*([0-9.]{4,8})\\s*(\\d{1,4})\\s*$";
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0){return;}
