@@ -56,8 +56,7 @@ public class CRUD {
     public static final int CREATE_ARGS_SIZE = 4;
     public static final int UPDATE_ARGS_SIZE  = 5;
     public static final int DELETE_ARGS_SIZE = 2;
-    public static final String MAKE_PRODUCT_REGEX = "^(\\d{1,8})\\s{0,7}(.{1,30})\\s{0,29}" +
-            "(\\d{1,5}\\.\\d{2})\\s{0,4}(\\d{1,4})\\s{0,3}$";
+    public static final String MAKE_PRODUCT_REGEX = "^(\\d{1,8})\\s*(.{1,30})\\s*([0-9.]{4,8})\\s*(\\d{1,4})\\s*$";
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0){return;}
@@ -75,7 +74,7 @@ public class CRUD {
                 writeProductListToFile(fileName,productList);
             }else if (args.length == DELETE_ARGS_SIZE && "-d".equals(args[0])){
                     productList = readProductsFromFile(fileName);
-                    deleteProduct(Integer.parseInt(args[1]), productList);
+                    deleteProduct(productList,Integer.parseInt(args[1]));
                     writeProductListToFile(fileName,productList);
             }
     }
@@ -100,6 +99,9 @@ public class CRUD {
     private static Product makeProductFromLine(String fileLine){
         Pattern pattern = Pattern.compile(MAKE_PRODUCT_REGEX);
         Matcher matcher = pattern.matcher(fileLine);
+        if (!matcher.find()){
+            return null;
+        }
         Integer id = Integer.parseInt(matcher.group(1));
         String productName = matcher.group(2);
         double price = Double.parseDouble(matcher.group(3));
@@ -143,7 +145,7 @@ public class CRUD {
         }
         return productList;
     }
-    private static void deleteProduct(int id, List<Product> productList){
+    private static void deleteProduct(List<Product> productList,int id){
         Iterator<Product> productIterator = productList.iterator();
         while (productIterator.hasNext()){
             Product product = productIterator.next();
@@ -153,7 +155,6 @@ public class CRUD {
             }
         }
     }
-
     public static class Product{
 
         private final int id;
