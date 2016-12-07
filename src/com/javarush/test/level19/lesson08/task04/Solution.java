@@ -16,6 +16,8 @@ package com.javarush.test.level19.lesson08.task04;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Solution {
     public static TestString testString = new TestString();
@@ -27,7 +29,27 @@ public class Solution {
         System.setOut(stream);
         testString.printSomething();
         String line = outputStream.toString();
+        String[] elements = line.split(" ");
+        int firstNum = Integer.parseInt(elements[0]);
+        String calculation = elements[1];
         System.setOut(consoleStream);
+        int secondNum = Integer.parseInt(elements[2]);
+        int result = 0;
+        if ("+".equals(calculation)){
+            result = firstNum + secondNum;
+            System.out.println(firstNum + " + " + secondNum + " = " + result);
+        }
+        if ("-".equals(calculation)){
+            result = firstNum - secondNum;
+            System.out.println(firstNum + " - " + secondNum + " = " + result);}
+        if ("*".equals(calculation)){
+            result = firstNum * secondNum;
+            System.out.println(firstNum + " * " + secondNum + " = " + result);
+        }
+
+
+
+
     }
 
     public static class TestString {
