@@ -27,10 +27,10 @@ public class Solution {
         BufferedWriter writer = new BufferedWriter(new FileWriter(secondFileName));
         String line;
         while ((line = reader.readLine())!=null){
-            Pattern pattern = Pattern.compile("[](\\d*)");
+            Pattern pattern = Pattern.compile("(^|\\s)(\\d+)(\\s|$)");
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()){
-                writer.write(matcher.group() + " ");
+                writer.write(matcher.group(2) + " ");
             }
         }
         reader.close();

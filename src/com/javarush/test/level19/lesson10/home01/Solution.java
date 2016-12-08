@@ -22,7 +22,31 @@ package com.javarush.test.level19.lesson10.home01;
 Сидоров 6.0
 */
 
+import java.io.*;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Pattern;
+
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Map<String, Double> map = new TreeMap<>();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(args[0]));
+        String line;
+        while ((line = bufferedReader.readLine()) != null){
+            String[] lineSplit = line.split(" ");
+            String key = lineSplit[0];
+            Double value = Double.parseDouble(lineSplit[1]);
+            if (map.containsKey(lineSplit[0])){
+                map.put(key,map.get(key) + value);
+            }else {
+                map.put(key,value);
+            }
+        }
+        bufferedReader.close();
+        for (Map.Entry<String,Double> pair: map.entrySet()) {
+            System.out.println(pair.getKey() + " " + pair.getValue());
+        }
+
     }
 }
