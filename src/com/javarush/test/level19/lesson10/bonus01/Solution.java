@@ -1,5 +1,10 @@
 package com.javarush.test.level19.lesson10.bonus01;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +33,22 @@ file1:         file2:             результат:(lines)
 
 public class Solution {
     public static List<LineItem> lines = new ArrayList<LineItem>();
+    public static List<String> firstList = new ArrayList<>();
+    public static List<String> secondList = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        String firstFileName = getFileName();
+        String secondFileName  = getFileName();
+        fillFirstList(firstFileName);
     }
 
+    private static String getFileName() throws IOException {
+        String fileName = null;
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
+            fileName = reader.readLine();
+        }
+        return fileName;
+    }
 
     public static enum Type {
         ADDED,        //добавлена новая строка
