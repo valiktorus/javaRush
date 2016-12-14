@@ -1,6 +1,5 @@
 package com.javarush.test.level19.lesson10.bonus01;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,32 +30,29 @@ file1:         file2:             результат:(lines)
 
 public class Solution {
     public static List<LineItem> lines = new ArrayList<LineItem>();
+    private static String firstFileName;
+    private static String secondFileName;
+
     public static void main(String[] args) throws IOException {
         List<String> firstList;
         List<String> secondList;
-//        String firstFileName = getFileName();
-//        String secondFileName  = getFileName();
-        String firstFileName;
-        String secondFileName;
+        getFileName();
+        firstList = fillList(firstFileName);
+        secondList = fillList(secondFileName);
+        fillResultList(firstList,secondList);
+        for (LineItem line:lines) {
+            System.out.println(line.type + " " + line.line);
+        }
+    }
+
+    private static void getFileName() throws IOException {
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
             firstFileName = reader.readLine();
             secondFileName = reader.readLine();
         }
-        firstList = fillList(firstFileName);
-        secondList = fillList(secondFileName);
-        fillResultList(firstList,secondList);
-
     }
-
-/*    private static String getFileName() throws IOException {
-        String fileName = null;
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
-            fileName = reader.readLine();
-        }
-        return fileName;
-    }*/
     private static List<String> fillList(String fileName) throws IOException {
-        List<String> resultList = null;
+        List<String> resultList;
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             resultList = new ArrayList<>();
             String line;
@@ -71,9 +67,9 @@ public class Solution {
             String firstFileElement = firstList.get(i);
             String secondFileElement = secondLIst.get(i);
             if (firstFileElement.equals(secondFileElement)){
-                lines.add(new LineItem(Type.SAME,firstFileElement));
+                lines.add(new LineItem(Type.SAME, firstFileElement));
             }else if (firstFileElement.isEmpty()){
-                lines.add(new LineItem(Type.ADDED,secondFileElement));
+                lines.add(new LineItem(Type.ADDED, secondFileElement));
                 }else if (secondFileElement.isEmpty()){
                 lines.add(new LineItem(Type.REMOVED, firstFileElement));
             }
