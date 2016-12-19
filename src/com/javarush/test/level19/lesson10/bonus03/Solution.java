@@ -26,7 +26,33 @@ text2>text1</tag>
 text1, text2 могут быть пустыми
 */
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String fileName = reader.readLine();
+        reader.close();
+        String tag = args[0];
+        StringBuilder builder = new StringBuilder();
+        BufferedReader fileReader = new BufferedReader(new FileReader(fileName));
+        String line;
+        while ((line = fileReader.readLine()) != null){
+            builder.append(line);
+        }
+        fileReader.close();
+        Pattern pattern = Pattern.compile(String.format("(<%s([^>]*)>(.*?(<%s([^>]*)>[^>]*?<\\/%s>).*?|.*?)<\\/%s>)",tag,tag,tag,tag));
+        Matcher matcher = pattern.matcher(builder);
+        while (matcher.find()){
+            System.out.println(matcher.group(1));
+            if (matcher.group(4)!= null){
+                System.out.println(matcher.group(4));
+            }
+        }
     }
 }
