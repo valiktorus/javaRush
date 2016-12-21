@@ -30,7 +30,7 @@ public class Solution {
 
 
 
-/*        BufferedReader bufferedReader = new BufferedReader(new FileReader("d:/1.txt"));
+/*        BufferedReader bufferedReader = new BufferedReader(new FileReader("d:/1.tmp"));
         String line;
         int countOfSimbols = 0;
         int countOfSpacebar = 0;

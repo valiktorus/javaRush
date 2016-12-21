@@ -54,7 +54,7 @@ public class Solution {
     public static final List<Person> PEOPLE = new ArrayList<Person>();
 
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("e:\\java\\projects\\javaRush\\src\\com\\javarush\\test\\level19\\lesson10\\home03\\1.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("e:\\java\\projects\\javaRush\\src\\com\\javarush\\test\\level19\\lesson10\\home03\\1.tmp"));
         String line;
         while ((line = reader.readLine()) != null){
             Pattern pattern = Pattern.compile("([а-яА-Я\\s]+)\\s(\\d+)\\s(\\d+)\\s(\\d+)");

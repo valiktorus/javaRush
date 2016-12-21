@@ -17,7 +17,7 @@ public class Solution {
         //вы можете найти your_file_name.tmp в папке TMP или исправьте outputStream/inputStream в соответствии с путем к вашему реальному файлу
         try {
 
-            File your_file_name = File.createTempFile("your_file_name", null);
+            File your_file_name = File.createTempFile("e:\\java\\javaRush\\src\\com\\javarush\\test\\level20\\lesson02\\task01\\1.tmp", null);
             OutputStream outputStream = new FileOutputStream(your_file_name);
             InputStream inputStream = new FileInputStream(your_file_name);
 
@@ -56,10 +56,33 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            PrintWriter printWriter = new PrintWriter(outputStream);
+            String hasName = name != null ? "yes" : "no";
+            printWriter.write(hasName + "\n");
+            if ("yes".equals(hasName)){
+                printWriter.write(name + "\n");
+                if (assets.size() > 0){
+                    for (Asset asset : assets) {
+                        printWriter.write(asset.getName()+"\n");
+                    }
+                }
+            }
+            printWriter.flush();
+            printWriter.close();
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String hasName = reader.readLine();
+            if ("yes".equals(hasName)){
+                this.name = reader.readLine();
+                String line;
+                while((line = reader.readLine()) != null){
+                    assets.add(new Asset(line));
+                }
+            }
+            reader.close();
         }
     }
 }

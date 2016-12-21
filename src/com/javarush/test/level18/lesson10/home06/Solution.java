@@ -22,7 +22,7 @@ import java.util.TreeMap;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        //       BufferedReader reader = new BufferedReader(new FileReader("d:/1.txt"));
+        //       BufferedReader reader = new BufferedReader(new FileReader("d:/1.tmp"));
         FileInputStream reader = new FileInputStream(args[0]);
         Map<Integer,Integer> map = new TreeMap<>();
         int simbol;
