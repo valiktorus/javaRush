@@ -2,6 +2,7 @@ package com.javarush.test.level20.lesson02.task02;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /* Читаем и пишем в файл: JavaRush
@@ -45,11 +46,35 @@ public class Solution {
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
             PrintWriter printWriter = new PrintWriter(outputStream);
+            for (User user : users) {
+                printWriter.println(user.getFirstName());
+                printWriter.println(user.getLastName());
+                printWriter.println(user.isMale());
+                printWriter.println(user.getBirthDate().getTime());
+                printWriter.println(user.getCountry().getDisplayedName());
+            }
+            printWriter.flush();
+            printWriter.close();
 
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null){
+                User user = new User();
+                user.setFirstName(line);
+                user.setLastName(reader.readLine());
+                user.setMale(Boolean.parseBoolean(reader.readLine()));
+                user.setBirthDate(new Date(Long.parseLong(reader.readLine())));
+                String country = reader.readLine();
+                if (country.equals("Ukraine")){user.setCountry(User.Country.UKRAINE);}
+                if (country.equals("Russia")){user.setCountry(User.Country.RUSSIA);}
+                if (country.equals("Other")){user.setCountry(User.Country.OTHER);}
+                users.add(user);
+            }
+            reader.close();
         }
     }
 }
