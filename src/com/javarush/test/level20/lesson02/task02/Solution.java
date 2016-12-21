@@ -44,6 +44,8 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            PrintWriter printWriter = new PrintWriter(outputStream);
+
         }
 
         public void load(InputStream inputStream) throws Exception {
