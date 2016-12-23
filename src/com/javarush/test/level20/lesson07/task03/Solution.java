@@ -26,6 +26,9 @@ public class Solution {
             this.lastName = lastName;
             this.age = age;
         }
+        public Person(){
+
+        }
 
         public void setMother(Person mother) {
             this.mother = mother;
@@ -41,18 +44,18 @@ public class Solution {
 
         @Override
         public void writeExternal(ObjectOutput out) throws IOException {
-            out.writeObject(mother);
+            out.writeObject(firstName);
+            out.writeObject(lastName);
             out.writeObject(father);
-            out.writeChars(firstName);
-            out.writeChars(lastName);
+            out.writeObject(mother);
             out.writeInt(age);
             out.writeObject(children);
         }
 
         @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-            firstName = in.readLine();
-            lastName = in.readLine();
+            firstName = (String) in.readObject();
+            lastName = (String) in.readObject();
             father = (Person)in.readObject();
             mother = (Person)in.readObject();
             age = in.readInt();
