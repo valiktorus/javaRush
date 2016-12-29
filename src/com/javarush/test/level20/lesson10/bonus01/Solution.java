@@ -32,9 +32,9 @@ public class Solution {
         int sum;
 
         for (int i = 1; i < N ; i++) {
-            List<Integer> arrayOfInteger = getArrayOfNumbers(i);
-            quantityOfNumbers = arrayOfInteger.size();
-            sum = sumOfMultipliers(arrayOfInteger, quantityOfNumbers);
+            List<Integer> listOfInteger = getArrayOfNumbers(i);
+            quantityOfNumbers = listOfInteger.size();
+            sum = sumOfMultipliers(listOfInteger, quantityOfNumbers);
             resultSetFill(i,sum);
         }
         int[] result = fillResultArray();
