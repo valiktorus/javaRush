@@ -19,12 +19,12 @@ getNumbers должен возвращать все такие числа в п�
 На выполнение дается 10 секунд и 50 МБ памяти.
 */
 public class Solution {
-   /* public static void main(String[] args) {
-        int[] i = getNumbers(5000000);
-        for (int j = 0; j <i.length ; j++) {
-            System.out.println(i[j]);
+    public static void main(String[] args) {
+        int[] numbers = getNumbers(5000000);
+        for (int j = 0; j <numbers.length ; j++) {
+            System.out.println(numbers[j]);
         }
-    }*/
+    }
 
     private static Set<Integer> resultSet = new TreeSet<>();
     public static int[] getNumbers(int N) {
