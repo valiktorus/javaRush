@@ -19,24 +19,55 @@ getNumbers должен возвращать все такие числа в п�
 На выполнение дается 10 секунд и 50 МБ памяти.
 */
 public class Solution {
-    public static int[] getNumbers(int N) {
-        int S;
-        int M;
-        Set<Integer> resultSet = new TreeSet<>();
-        for (int i = 1; i < N ; i++) {
-            M = (int) Math.ceil(Math.log10(i + 0.5));
-            List<Integer> arrayOfInteger = getArrayOfNumbers(i);
-            if (i == Math.pow(arrayOfInteger.get(0),M));
+   /* public static void main(String[] args) {
+        int[] i = getNumbers(5000000);
+        for (int j = 0; j <i.length ; j++) {
+            System.out.println(i[j]);
         }
-        int[] result = null;
+    }*/
+
+    private static Set<Integer> resultSet = new TreeSet<>();
+    public static int[] getNumbers(int N) {
+        int quantityOfNumbers;
+        int sum;
+
+        for (int i = 1; i < N ; i++) {
+            List<Integer> arrayOfInteger = getArrayOfNumbers(i);
+            quantityOfNumbers = arrayOfInteger.size();
+            sum = sumOfMultipliers(arrayOfInteger, quantityOfNumbers);
+            resultSetFill(i,sum);
+        }
+        int[] result = fillResultArray();
         return result;
     }
-    public static List<Integer> getArrayOfNumbers(int i){
+
+    private static List<Integer> getArrayOfNumbers(int i){
         List<Integer> list = new ArrayList<>();
         while(i > 0) {
             list.add(0,(i % 10));
             i /= 10;
         }
         return list;
+    }
+    private static int sumOfMultipliers(List<Integer> list,int quantityOfNumbers){
+        int sum = 0;
+        for (int i = 0; i < list.size() ; i++) {
+            sum = sum + (int)Math.pow(list.get(i),quantityOfNumbers);
+        }
+        return sum;
+    }
+    private static void resultSetFill(int number, int sum){
+        if (number == sum){
+            resultSet.add(number);
+        }
+    }
+    private static int[] fillResultArray(){
+        int[] resultArray = new int[resultSet.size()];
+        int i = 0;
+        for (Integer number:resultSet) {
+            resultArray[i] = number;
+            i++;
+        }
+        return resultArray;
     }
 }
