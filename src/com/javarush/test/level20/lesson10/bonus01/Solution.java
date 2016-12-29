@@ -1,5 +1,10 @@
 package com.javarush.test.level20.lesson10.bonus01;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 /* Алгоритмы-числа
 Число S состоит из M чисел, например, S=370 и M(количество цифр)=3
 Реализовать логику метода getNumbers, который должен среди натуральных чисел меньше N (long)
@@ -17,10 +22,21 @@ public class Solution {
     public static int[] getNumbers(int N) {
         int S;
         int M;
+        Set<Integer> resultSet = new TreeSet<>();
         for (int i = 1; i < N ; i++) {
-
+            M = (int) Math.ceil(Math.log10(i + 0.5));
+            List<Integer> arrayOfInteger = getArrayOfNumbers(i);
+            if (i == Math.pow(arrayOfInteger.get(0),M));
         }
         int[] result = null;
         return result;
+    }
+    public static List<Integer> getArrayOfNumbers(int i){
+        List<Integer> list = new ArrayList<>();
+        while(i > 0) {
+            list.add(0,(i % 10));
+            i /= 10;
+        }
+        return list;
     }
 }
