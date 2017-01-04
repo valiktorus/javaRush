@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Solution {
+public class SolutionFromInet {
     private static List<Integer> replica = new ArrayList<>();
 
     public static void main(String[]args) {
@@ -24,7 +24,6 @@ public class Solution {
     }
 
     public static int[] getNumbers(int N) {
-
         for (int i = 0; i <= N; i++)
         {
             if (isNumberUnique(i)) {
