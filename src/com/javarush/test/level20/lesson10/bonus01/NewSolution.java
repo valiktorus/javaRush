@@ -118,7 +118,8 @@ public class NewSolution {
         for (int i = 0; i < arrayOfNumbers.length ; i++) {
             sum += arrayOfMultipliers[arrayOfNumbers[i]][countOfNumbers];
         }
-        if (isArmstrongNumber(sum,getCountOfNumbers(sum),getArrayOfNumbers(sum,getCountOfNumbers(sum)),
+        int countOfNumbersOfSum = getCountOfNumbers(sum);
+        if (isArmstrongNumber(sum, countOfNumbersOfSum,getArrayOfNumbers(sum, countOfNumbersOfSum),
                 arrayOfMultipliers)){
         armstrongNumber = sum;
             return true;
