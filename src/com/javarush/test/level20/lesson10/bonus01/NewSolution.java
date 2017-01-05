@@ -16,8 +16,9 @@ getNumbers должен возвращать все такие числа в п�
 На выполнение дается 10 секунд и 50 МБ памяти.
 */
 public class NewSolution {
-    private static final int COMPARE_MAX_VALUE = Integer.MAX_VALUE;
+    private static final int COMPARE_MAX_VALUE = 5000000;
     private static final int MILLISECONDS = 1000;
+    private static int armstrongNumber;
     public static void main(String[] args) {
         long startTime = new Date().getTime();
         int[] numbers = getNumbers(COMPARE_MAX_VALUE);
@@ -25,19 +26,22 @@ public class NewSolution {
         System.out.println("Total (sec): " + (endTime - startTime) / MILLISECONDS);
         Arrays.stream(numbers).forEach(System.out::println);
     }
+
     public static int[] getNumbers(int N) {
-        List<Integer> resultList = new LinkedList<>();
+        Set<Integer> set = new TreeSet<>();
         int[][] arrayOfMultipliers = getArrayOfMultipliers();
         for (int i = 1; i < N ; i++) {
-            int countOfNumbers = getCountOfNumbers(i);
-            int[] arrayOfNumbers = getArrayOfNumbers(i,countOfNumbers);
-            if (findArmstrongNumber(i,countOfNumbers, arrayOfNumbers)){
-                resultList.add(i);
+            if (isNumberUnique(i)){
+                int countOfNumbers = getCountOfNumbers(i);
+                int[] arrayOfNumbers = getArrayOfNumbers(i,countOfNumbers);
+                if (findArmstrongNumber(i,countOfNumbers, arrayOfNumbers,arrayOfMultipliers)){
+                    set.add(armstrongNumber);
+                }
             }
         }
-        return resultList.stream().mapToInt(Integer::intValue).toArray();
-
+        return set.stream().mapToInt(Integer::intValue).toArray();
     }
+
     private static int getCountOfNumbers(int number){
         if (number >= 1 && number < 10){
             return 1;
@@ -61,15 +65,40 @@ public class NewSolution {
     }
 
     private static int[][] getArrayOfMultipliers(){
-        int[][] result = new int[9][9];
-        for (int i = 0; i <9 ; i++) {
-            for (int j = 0; j <9 ; j++) {
-                result[i][j] = (int)Math.pow(i,j);
+        int[][] result = new int[10][10];
+        for (int i = 0; i <10 ; i++) {
+            for (int j = 0; j <10 ; j++) {
+                result[i][j] = fastPow(i,j);
             }
         }
         return result;
     }
 
+    private static int fastPow(int firstNum, int secondNum){
+        int result = 1;
+        for (int i = 0; i <secondNum ; i++) {
+            result *=firstNum;
+        }
+        return result;
+    }
+    private static boolean isNumberUnique(int number){
+        int lastElement;
+        int curentElement;
+        curentElement = number % 10;
+        lastElement = curentElement;
+        number /= 10;
+        while (number > 0){
+            curentElement = number % 10;
+            if (curentElement > lastElement){
+                return false;
+            }else {
+                lastElement = curentElement;
+                number /= 10;
+            }
+        }
+        return true;
+
+    }
     private static int[] getArrayOfNumbers(int number, int countOfNumbers){
         int[] result = new int[countOfNumbers];
         for (int i = countOfNumbers-1; i >= 0 ; i--) {
@@ -78,16 +107,29 @@ public class NewSolution {
         }
         return result;
     }
-    private static boolean findArmstrongNumber(int number,int countOfNumbers, int[] arrayOfNumbers){
+
+    private static boolean findArmstrongNumber(int number,int countOfNumbers, int[] arrayOfNumbers,
+                                               int[][] arrayOfMultipliers){
         int sum = 0;
 
         for (int i = 0; i < arrayOfNumbers.length ; i++) {
-            int newSum = 1;
-            for (int j = 0; j < countOfNumbers ; j++) {
-                newSum *=arrayOfNumbers[i];
-            }
-            sum = sum + newSum;
+            sum += arrayOfMultipliers[arrayOfNumbers[i]][countOfNumbers];
         }
+        if (isArmstrongNumber(sum,getCountOfNumbers(sum),getArrayOfNumbers(sum,getCountOfNumbers(sum)),
+                arrayOfMultipliers)){
+        armstrongNumber = sum;
+            return true;
+        }
+        return false;
+    }
+    private static boolean isArmstrongNumber(int number,int countOfNumbers, int[] arrayOfNumbers,
+                                               int[][] arrayOfMultipliers){
+        int sum = 0;
+
+        for (int i = 0; i < arrayOfNumbers.length ; i++) {
+            sum += arrayOfMultipliers[arrayOfNumbers[i]][countOfNumbers];
+        }
+
         return number == sum;
     }
 }

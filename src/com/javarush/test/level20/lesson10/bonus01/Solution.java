@@ -9,7 +9,7 @@ public class Solution {
 
     public static void main(String[]args) {
         long start = System.currentTimeMillis();
-        int[] array = getNumbers(999999999);
+        int[] array = getNumbers(Integer.MAX_VALUE);
         long end = System.currentTimeMillis() - start;
         long memore = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         SimpleDateFormat sdf = new SimpleDateFormat("ss.SSS");
