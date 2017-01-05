@@ -27,6 +27,7 @@ public class NewSolution {
     }
     public static int[] getNumbers(int N) {
         List<Integer> resultList = new LinkedList<>();
+        int[][] arrayOfMultipliers = getArrayOfMultipliers();
         for (int i = 1; i < N ; i++) {
             int countOfNumbers = getCountOfNumbers(i);
             int[] arrayOfNumbers = getArrayOfNumbers(i,countOfNumbers);
@@ -57,6 +58,16 @@ public class NewSolution {
         }else if (number >= 1_000_000_000){
             return 9;
         }else return 0;
+    }
+
+    private static int[][] getArrayOfMultipliers(){
+        int[][] result = new int[9][9];
+        for (int i = 0; i <9 ; i++) {
+            for (int j = 0; j <9 ; j++) {
+                result[i][j] = (int)Math.pow(i,j);
+            }
+        }
+        return result;
     }
 
     private static int[] getArrayOfNumbers(int number, int countOfNumbers){
