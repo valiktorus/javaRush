@@ -16,7 +16,7 @@ getNumbers должен возвращать все такие числа в п�
 На выполнение дается 10 секунд и 50 МБ памяти.
 */
 public class NewSolution {
-    private static final int COMPARE_MAX_VALUE = 5000000;
+    private static final int COMPARE_MAX_VALUE = 999999999;
     private static final int MILLISECONDS = 1000;
     private static int armstrongNumber;
     public static void main(String[] args) {
@@ -24,6 +24,8 @@ public class NewSolution {
         int[] numbers = getNumbers(COMPARE_MAX_VALUE);
         long endTime = new Date().getTime();
         System.out.println("Total (sec): " + (endTime - startTime) / MILLISECONDS);
+        long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        System.out.println("Memory " + memory / 1048576);
         Arrays.stream(numbers).forEach(System.out::println);
     }
 
@@ -34,7 +36,7 @@ public class NewSolution {
             if (isNumberUnique(i)){
                 int countOfNumbers = getCountOfNumbers(i);
                 int[] arrayOfNumbers = getArrayOfNumbers(i,countOfNumbers);
-                if (findArmstrongNumber(i,countOfNumbers, arrayOfNumbers,arrayOfMultipliers)){
+                if (findArmstrongNumber(countOfNumbers, arrayOfNumbers,arrayOfMultipliers)){
                     set.add(armstrongNumber);
                 }
             }
@@ -83,16 +85,18 @@ public class NewSolution {
     }
     private static boolean isNumberUnique(int number){
         int lastElement;
-        int curentElement;
-        curentElement = number % 10;
-        lastElement = curentElement;
+        int currentElement;
+        lastElement = number % 10;
         number /= 10;
         while (number > 0){
-            curentElement = number % 10;
-            if (curentElement > lastElement){
+            currentElement = number % 10;
+            if (currentElement == 0){
+                return true;
+            }
+            if (currentElement > lastElement){
                 return false;
             }else {
-                lastElement = curentElement;
+                lastElement = currentElement;
                 number /= 10;
             }
         }
@@ -108,10 +112,9 @@ public class NewSolution {
         return result;
     }
 
-    private static boolean findArmstrongNumber(int number,int countOfNumbers, int[] arrayOfNumbers,
+    private static boolean findArmstrongNumber(int countOfNumbers, int[] arrayOfNumbers,
                                                int[][] arrayOfMultipliers){
         int sum = 0;
-
         for (int i = 0; i < arrayOfNumbers.length ; i++) {
             sum += arrayOfMultipliers[arrayOfNumbers[i]][countOfNumbers];
         }
@@ -125,11 +128,9 @@ public class NewSolution {
     private static boolean isArmstrongNumber(int number,int countOfNumbers, int[] arrayOfNumbers,
                                                int[][] arrayOfMultipliers){
         int sum = 0;
-
         for (int i = 0; i < arrayOfNumbers.length ; i++) {
             sum += arrayOfMultipliers[arrayOfNumbers[i]][countOfNumbers];
         }
-
         return number == sum;
     }
 }
