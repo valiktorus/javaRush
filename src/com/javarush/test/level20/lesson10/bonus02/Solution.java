@@ -23,13 +23,6 @@ public class Solution {
     }
 
     public static int getRectangleCount(byte[][] a) {
-        for (int i = 0; i <a.length ; i++) {
-            for (int j = 0; j <a.length ; j++) {
-                if (a[j][i] == 1){
-
-                }
-            }
-        }
         return 0;
     }
 }
