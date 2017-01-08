@@ -58,6 +58,7 @@ public class Solution {
                 }
                 clone.branches = branchesClone.clone();
             }
+
             return clone;
 
         }
