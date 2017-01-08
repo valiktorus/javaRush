@@ -34,7 +34,7 @@ public class Solution {
         }
     }
 
-    public static class Tree extends Plant {
+    public static class Tree extends Plant implements Cloneable{
         private String[] branches;
 
         public Tree(String name, String[] branches) {
@@ -44,6 +44,22 @@ public class Solution {
 
         public String[] getBranches() {
             return branches;
+        }
+
+        @Override
+        protected Tree clone() throws CloneNotSupportedException {
+            Tree clone = (Tree) super.clone();
+            if (branches == null){
+                clone.branches = null;
+            }else {
+            String[] branchesClone = new String[branches.length];
+                for (int i = 0; i < branchesClone.length; i++) {
+                    branchesClone[i] = branches[i];
+                }
+                clone.branches = branchesClone.clone();
+            }
+            return clone;
+
         }
     }
 }
