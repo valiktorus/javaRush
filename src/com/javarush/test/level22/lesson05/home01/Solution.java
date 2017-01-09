@@ -43,15 +43,19 @@ public class Solution {
     }
 
     public String getPartOfString(String string, String threadName){
-        if (string.isEmpty() || string == null){
-
+        try
+        {
+            int a = string.indexOf("\t");
+            int b = string.lastIndexOf("\t");
+            String result = string.substring(a+1, b);
+            return result;
         }
-        Pattern pattern = Pattern.compile("[^\\t]+\\t(.+)\\t");
-        Matcher matcher = pattern.matcher(string);
-        if (matcher.find()){
-            return matcher.group(1);
+        catch(Exception e)
+        {
+            if (FIRST_THREAD_NAME.equals(threadName)) throw new TooShortStringFirstThreadException(e);
+            if (SECOND_THREAD_NAME.equals(threadName)) throw new TooShortStringSecondThreadException(e);
+            Exception f = new RuntimeException();
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 }
