@@ -52,8 +52,9 @@ public class Solution {
         boolean minus = checkNumberByMinus(telNumber);
         boolean parenthesis = checkNumberByParenthesis(telNumber);
         boolean chars = checkNumberByChar(telNumber);
+        boolean numberFinish = checkNumberByFinalSimbol(telNumber);
 
-        return plus && numbers && minus && parenthesis && chars;
+        return plus && numbers && minus && parenthesis && chars && numberFinish;
     }
     private static boolean checkNumberByParenthesis(String telNumber){
         if (telNumber.contains("(")){
@@ -100,5 +101,9 @@ public class Solution {
 
     private static boolean checkNumberByChar(String telNumber){
         return telNumber.length() - telNumber.replaceAll("[a-zA-Zа-яА-Я]","") .length() == 0;
+    }
+
+    private static boolean checkNumberByFinalSimbol(String telNumber){
+        return telNumber.matches(".*\\d$");
     }
 }
