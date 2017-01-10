@@ -93,9 +93,7 @@ public class Solution {
             boolean rule3ToOneMinus = telNumber.matches("^[^a-z^A-Z-]+-[^a-z^A-Z-]+$");
             if (rule3Reverse){
                 return false;
-            }else if (rule3 || rule3ToOneMinus){
-                return true;
-            }return false;
+            }else return rule3 || rule3ToOneMinus;
         }
         return true;
     }
