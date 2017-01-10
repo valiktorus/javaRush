@@ -52,7 +52,7 @@ public class Solution {
         boolean minus = checkNumberByMinus(telNumber);
         boolean parenthesis = checkNumberByParenthesis(telNumber);
         boolean chars = checkNumberByChar(telNumber);
-        boolean numberFinish = checkNumberByFinalSimbol(telNumber);
+        boolean numberFinish = checkNumberByFinalSymbol(telNumber);
 
         return plus && numbers && minus && parenthesis && chars && numberFinish;
     }
@@ -103,7 +103,7 @@ public class Solution {
         return telNumber.length() - telNumber.replaceAll("[a-zA-Zа-яА-Я]","") .length() == 0;
     }
 
-    private static boolean checkNumberByFinalSimbol(String telNumber){
+    private static boolean checkNumberByFinalSymbol(String telNumber){
         return telNumber.matches(".*\\d$");
     }
 }
