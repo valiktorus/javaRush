@@ -1,8 +1,5 @@
 package com.javarush.test.level22.lesson13.task03;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /* Проверка номера телефона
 Метод checkTelNumber должен проверять, является ли аргумент telNumber валидным номером телефона.
 Критерии валидности:
@@ -26,8 +23,7 @@ import java.util.regex.Pattern;
 050123456 - false
 (0)501234567 - false
 */
-public class Solution {
-    public static final String REGEX = "([+]?(\\d*?[(]\\d{3}[)])?)\\d+(((\\-\\d+){1,3})|(\\d+))";
+public class OldSolution {
     public static void main(String[] args) {
         String num1 = "+380501234567";
         String num2 = "+38(050)1234567";
@@ -50,12 +46,62 @@ public class Solution {
     }
 
     public static boolean checkTelNumber(String telNumber) {
-        return telNumber.matches(REGEX) &&
-                (telNumber.startsWith("+") && getQuantityOfNumbers(telNumber) == 12 || getQuantityOfNumbers(telNumber) == 10);
 
+        boolean plus = checkNumberByPlus(telNumber);
+        boolean numbers = checkQuantityIfStartsWithNumberOrParenthesis(telNumber);
+        boolean minus = checkNumberByMinus(telNumber);
+        boolean parenthesis = checkNumberByParenthesis(telNumber);
+        boolean chars = checkNumberByChar(telNumber);
+        boolean numberFinish = checkNumberByFinalSymbol(telNumber);
+
+        return plus && numbers && minus && parenthesis && chars && numberFinish;
     }
+    private static boolean checkNumberByParenthesis(String telNumber){
+        if (telNumber.contains("(")){
+            if (!telNumber.contains(")")){
+                return false;
+            }else {
+                return telNumber.matches("^[+\\d]?\\d*\\(\\d{3}\\)[^\\(^\\)]+$");
+            }
+        }
+        return true;
+    }
+
     private static int getQuantityOfNumbers(String telNumber){
         return telNumber.length() - telNumber.replaceAll("\\d","").length();
     }
 
+    private static boolean checkNumberByPlus(String telNumber){
+        if (telNumber.contains("+")) {
+            return telNumber.matches("^\\+.+") && 12 == getQuantityOfNumbers(telNumber);
+        }
+        return true;
+    }
+
+    private static boolean checkQuantityIfStartsWithNumberOrParenthesis(String telNumber){
+        if (telNumber.matches("^\\(.*") || telNumber.matches("^\\d.*")){
+            return 10 == getQuantityOfNumbers(telNumber);
+        }
+        return true;
+    }
+
+    private static boolean checkNumberByMinus(String telNumber){
+        if (telNumber.contains("-")){
+            boolean rule3Reverse = telNumber.matches("--");
+            boolean rule3 = telNumber.matches("^[^a-z^A-Z-]+-\\d+-[^a-z^A-Z-]+$");
+            boolean rule3ToOneMinus = telNumber.matches("^[^a-z^A-Z-]+-[^a-z^A-Z-]+$");
+            if (rule3Reverse){
+                return false;
+            }else return rule3 || rule3ToOneMinus;
+        }
+        return true;
+    }
+
+    private static boolean checkNumberByChar(String telNumber){
+        return telNumber.length() - telNumber.replaceAll("[a-zA-Zа-яА-Я]","") .length() == 0;
+    }
+
+    private static boolean checkNumberByFinalSymbol(String telNumber){
+        return telNumber.matches(".*\\d$");
+    }
 }
