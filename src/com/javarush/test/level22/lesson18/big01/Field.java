@@ -1,7 +1,6 @@
 package com.javarush.test.level22.lesson18.big01;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Класс Field описывает "поле клеток" игры Тетрис
@@ -44,7 +43,7 @@ public class Field
     public Integer getValue(int x, int y)
     {
         if (x >= 0 && x < width && y >= 0 && y < height)
-            return matrix[y][x];
+            return (Integer) matrix[y][x];
 
         return null;
     }
@@ -121,14 +120,35 @@ public class Field
      */
     public void removeFullLines()
     {
-        List<String[]> list = new ArrayList<>();
+        /*
+        Напиши реализацию метода removeFullLines в классе Field
+Надо
+а) удалить все строки из матрицы, которые полностью заполнены (состоят из одних единиц)
+б) сместить оставшиеся строки вниз
+в) создать новые строки взамен отсутствующих.
+
+ВАЖНО!
+matrix[y][x] содержит элемент с координатами (x,y)
+matrix[i] содержит i-ю строку
+а) Мы можем удалить стоку:
+matrix[i] = null
+
+б)Скопировать [ссылку на] строку:
+matrix[i+1] = matrix[i];
+
+в)Создать новую строку:
+matrix[i] = new int[width];
+*/
+        ArrayList<int[]> list = new ArrayList();
         for (int i = 0; i <height ; i++) {
             for (int j = 0; j <width ; j++) {
-                if (matrix[i][j] == 0){
-                    
+                if (matrix[i][j] == 1){
+                    list.add(matrix[i]);
+                    break;
                 }
             }
         }
+
         //Например так:
         //Создаем список для хранения линий
         //Копируем все непустые линии в список.
